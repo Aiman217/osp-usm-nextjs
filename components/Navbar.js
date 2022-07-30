@@ -40,7 +40,7 @@ const Navbar = () => {
           </div>
           <div className="flex flex-col items-center justify-center">
             <h1 className="text-xl sm:text-2xl font-mono font-bold">Gnosis</h1>
-            <p className="hidden sm:block text-sm text-gray-300 font-extralight">
+            <p className="hidden sm:block text-sm text-gray-300 font-extralight text-center">
               Where journey of knowledge begin
             </p>
           </div>
