@@ -93,6 +93,14 @@ const Navbar = () => {
                   </li>
                 ))}
               </ul>
+              <div>
+                <div
+                  onClick={() => setNav(false)}
+                  className="rounded-lg bg-gray-700 text-white px-2 py-1 text-sm text-center uppercase font-bold"
+                >
+                  <Link href="/">Login</Link>
+                </div>
+              </div>
             </div>
           </div>
         </div>
