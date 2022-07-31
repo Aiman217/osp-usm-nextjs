@@ -46,6 +46,26 @@ export default function Home() {
       title: "Title 5",
       text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio cum inventore porro non a praesentium?",
     },
+    {
+      title: "Title 6",
+      text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio cum inventore porro non a praesentium?",
+    },
+    {
+      title: "Title 7",
+      text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio cum inventore porro non a praesentium?",
+    },
+    {
+      title: "Title 8",
+      text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio cum inventore porro non a praesentium?",
+    },
+    {
+      title: "Title 9",
+      text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio cum inventore porro non a praesentium?",
+    },
+    {
+      title: "Title 10",
+      text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio cum inventore porro non a praesentium?",
+    },
   ];
 
   return (
@@ -53,7 +73,7 @@ export default function Home() {
       <Head>
         <title>Gnosis | Home</title>
       </Head>
-      <div className="w-full sm:max-w-[1024px] h-full px-4 py-6 grid gap-4 auto-cols-fr mx-auto select-none">
+      <div className="w-full sm:max-w-[1024px] h-full px-4 pb-6 pt-32 grid gap-4 auto-cols-fr mx-auto select-none">
         <ul className="scrollbar snap-x snap-mandator flex flex-nowrap gap-2 overflow-x-scroll items-center bg-gray-300 bg-opacity-40 rounded-lg">
           {bookList.map((item, index) => (
             <li key={index} className="flex-none snap-center first:pl-2 last:pr-2">

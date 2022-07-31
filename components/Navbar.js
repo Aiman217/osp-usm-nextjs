@@ -22,7 +22,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="w-full h-20 sm:h-20 bg-[#4A2B74] text-white shadow-lg shadow-gray-600 sticky select-none">
+      <div className="w-full h-20 sm:h-20 bg-[#4A2B74] text-white shadow-lg shadow-gray-600 fixed select-none">
         <div className="h-full px-2 sm:px-4 py-1 sm:py-2 grid grid-flow-col auto-cols-fr gap-2">
           <div className="flex items-center justify-start">
             <IoIosMenu
