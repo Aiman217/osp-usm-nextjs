@@ -38,11 +38,10 @@ const Navbar = () => {
               ))}
             </ul>
           </div>
-          <div className="flex flex-col items-center justify-center">
-            <h1 className="text-xl sm:text-2xl font-mono font-bold">Gnosis</h1>
-            <p className="hidden sm:block text-sm text-gray-300 font-extralight text-center">
-              Where journey of knowledge begin
-            </p>
+          <div className="flex items-center justify-center">
+            <h1 className="text-lg sm:text-xl font-mono font-bold">
+              OneStopPortal
+            </h1>
           </div>
           <div className="flex items-center justify-end">
             <div className="rounded-full border-white flex items-center shadow-sm shadow-white">
@@ -74,8 +73,8 @@ const Navbar = () => {
           >
             <div className="w-full h-full px-2 py-1 flex flex-col gap-2">
               <div className="flex justify-between items-center basis-[10%]">
-                <h1 className="flex-grow text-center text-xl font-mono font-bold">
-                  Gnosis
+                <h1 className="flex-grow text-center text-base font-mono font-bold">
+                  OneStopPortal
                 </h1>
                 <IoIosClose
                   onClick={() => setNav(false)}

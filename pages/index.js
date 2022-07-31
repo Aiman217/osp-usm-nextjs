@@ -4,25 +4,28 @@ import Image from "next/image";
 export default function Home() {
   const bookList = [
     {
-      src: "https://api.lorem.space/image/movie?w=300&h=600",
+      src: "https://picsum.photos/1200/600",
     },
     {
-      src: "https://api.lorem.space/image/game?w=300&h=600",
+      src: "https://picsum.photos/1200/600",
     },
     {
-      src: "https://api.lorem.space/image/album?w=300&h=600",
+      src: "https://picsum.photos/1200/600",
     },
     {
-      src: "https://api.lorem.space/image/book?w=300&h=600",
+      src: "https://picsum.photos/1200/600",
     },
     {
-      src: "https://api.lorem.space/image/fashion?w=300&h=600",
+      src: "https://picsum.photos/1200/600",
     },
     {
-      src: "https://api.lorem.space/image/watch?w=300&h=600",
+      src: "https://picsum.photos/1200/600",
     },
     {
-      src: "https://api.lorem.space/image/furniture?w=300&h=600",
+      src: "https://picsum.photos/1200/600",
+    },
+    {
+      src: "https://picsum.photos/1200/600",
     },
   ];
   const announcementList = [
@@ -46,47 +49,31 @@ export default function Home() {
       title: "Title 5",
       text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio cum inventore porro non a praesentium?",
     },
-    {
-      title: "Title 6",
-      text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio cum inventore porro non a praesentium?",
-    },
-    {
-      title: "Title 7",
-      text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio cum inventore porro non a praesentium?",
-    },
-    {
-      title: "Title 8",
-      text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio cum inventore porro non a praesentium?",
-    },
-    {
-      title: "Title 9",
-      text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio cum inventore porro non a praesentium?",
-    },
-    {
-      title: "Title 10",
-      text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio cum inventore porro non a praesentium?",
-    },
   ];
 
   return (
     <div>
       <Head>
-        <title>Gnosis | Home</title>
+        <title>OSP@USM | Home</title>
       </Head>
       <div className="w-full sm:max-w-[1024px] h-full px-4 pb-6 pt-32 grid gap-4 auto-cols-fr mx-auto select-none">
-        <ul className="scrollbar snap-x snap-mandator flex flex-nowrap gap-2 overflow-x-scroll items-center bg-gray-300 bg-opacity-40 rounded-lg">
+        <ul className="scrollbar snap-x snap-mandatory flex flex-nowrap gap-2 overflow-x-scroll items-center bg-gray-300 bg-opacity-40 rounded-lg">
           {bookList.map((item, index) => (
-            <li key={index} className="flex-none snap-center first:pl-2 last:pr-2">
+            <li
+              key={index}
+              className="flex-none snap-center first:pl-2 last:pr-2"
+            >
               <img
                 src={item.src}
                 alt="Logo"
-                className="m-0 p-0 w-[150px] h-auto rounded-lg"
+                className="m-0 p-0 w-[240px] sm:w-[600px] object-contain h-auto rounded-lg sm:rounded-2xl"
               />
             </li>
           ))}
         </ul>
         <div className="grid sm:grid-cols-2">
-          <div className="p-1 flex flex-col gap-1">
+          <div className="p-1 flex flex-col gap-2 sm:gap-4">
+            <h1 className="text-lg font-bold text-center uppercase mb-4">Announcement</h1>
             {announcementList.map((item, index) => (
               <div
                 key={index}
