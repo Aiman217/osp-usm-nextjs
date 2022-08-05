@@ -26,7 +26,7 @@ const Nav = ({ children }) => {
       <div className="drawer bg-base-200">
         <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col">
-          <div className="navbar w-full h-auto bg-base-100 px-4 shadow-sm shadow-neutral sticky">
+          <div className="navbar w-full h-[10%] bg-base-100 px-4 shadow-sm shadow-neutral sticky">
             <div className="flex-none sm:hidden">
               <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
                 <HiMenu htmlFor="my-drawer-3" size={25} />
@@ -61,8 +61,8 @@ const Nav = ({ children }) => {
               <div className="divider divider-horizontal hidden sm:block" />
               {user === null ? (
                 <button className="btn btn-outline btn-success btn-xs sm:btn-md">
-                  <Link href="/">
-                    <a>Home</a>
+                  <Link href="/login">
+                    <a>Login</a>
                   </Link>
                 </button>
               ) : (
