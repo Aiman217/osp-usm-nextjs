@@ -46,13 +46,13 @@ const Nav = ({ children }) => {
                   </Link>
                 </li>
                 <li className="uppercase font-bold">
-                  <Link href="/">
-                    <a>Home</a>
+                  <Link href="/about">
+                    <a>About</a>
                   </Link>
                 </li>
                 <li className="uppercase font-bold">
-                  <Link href="/">
-                    <a>Home</a>
+                  <Link href="/discover">
+                    <a>Discover</a>
                   </Link>
                 </li>
               </ul>
@@ -92,13 +92,13 @@ const Nav = ({ children }) => {
                 </Link>
               </li>
               <li className="uppercase font-bold text-sm">
-                <Link href="/">
-                  <a>Home</a>
+                <Link href="/about">
+                  <a>About</a>
                 </Link>
               </li>
               <li className="uppercase font-bold text-sm">
-                <Link href="/">
-                  <a>Home</a>
+                <Link href="/discover">
+                  <a>Discover</a>
                 </Link>
               </li>
             </ul>

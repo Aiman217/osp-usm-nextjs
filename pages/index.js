@@ -15,7 +15,7 @@ export default function Home() {
               perferendis eaque, magni aliquam sequi!
             </p>
             <button className="btn btn-sm sm:btn-lg btn-primary">
-              <Link href="/">Register Now</Link>
+              <Link href="/register">Register Now</Link>
             </button>
           </div>
         </div>
