@@ -1,12 +1,28 @@
 import { useState } from "react";
 import { HiMenu } from "react-icons/hi";
 import Link from "next/link";
+import Head from "next/head";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../firebase-config";
 import ThemeSelector from "./ThemeSelector";
 
 const Nav = ({ children }) => {
   const [user, setUser] = useState({});
+
+  onAuthStateChanged(auth, (currentUser) => {
+    setUser(currentUser);
+  });
+
+  const logout = () => {
+    return signOut(auth);
+  };
+
   return (
     <>
+      <Head>
+        <title>OSP@USM</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <div className="drawer bg-base-200">
         <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col">
@@ -50,7 +66,10 @@ const Nav = ({ children }) => {
                   </Link>
                 </button>
               ) : (
-                <button className="btn btn-outline btn-error btn-xs sm:btn-md">
+                <button
+                  onClick={logout}
+                  className="btn btn-outline btn-error btn-xs sm:btn-md"
+                >
                   Logout
                 </button>
               )}
