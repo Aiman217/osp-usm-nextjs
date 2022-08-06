@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { getDocs, collection } from "firebase/firestore";
+import { db } from "../firebase-config";
 import { AiOutlineCloudDownload } from "react-icons/ai";
 import Moment from "moment";
 
@@ -7,6 +9,35 @@ const Discovery = () => {
   const [docLists, setDocLists] = useState([]);
   const [annLists, setAnnLists] = useState([]);
   const tabList = ["Documents", "Announcements", "Tab 3"];
+
+  useEffect(() => {
+    // Fetch documents
+    const docCollectionRef = collection(db, "documents");
+    const getDocuments = async () => {
+      const dataDoc = await getDocs(docCollectionRef);
+      setDocLists(
+        dataDoc.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }))
+      );
+    };
+    getDocuments();
+    // Finish fetching documents
+    // Fetch announcements
+    const annCollectionRef = collection(db, "announcements");
+    const getAnn = async () => {
+      const dataAnn = await getDocs(annCollectionRef);
+      setAnnLists(
+        dataAnn.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }))
+      );
+    };
+    getAnn();
+    // Finish fetching announcements
+  }, []);
 
   return (
     <>
