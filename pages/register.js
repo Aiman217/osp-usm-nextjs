@@ -1,8 +1,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { auth } from "../firebase-config";
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import { AiOutlineClose } from "react-icons/ai";
 
 const Register = () => {
@@ -10,19 +8,6 @@ const Register = () => {
   const [registerPassword, setRegisterPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
-
-  const register = async () => {
-    try {
-      await createUserWithEmailAndPassword(
-        auth,
-        registerEmail,
-        registerPassword
-      );
-      router.push("/");
-    } catch (error) {
-      setError(error.message);
-    }
-  };
 
   return (
     <>
@@ -43,9 +28,7 @@ const Register = () => {
                   <span className="label-text">Email</span>
                 </label>
                 <input
-                  onChange={(event) => {
-                    setRegisterEmail(event.target.value);
-                  }}
+                  onChange={(event) => {}}
                   type="email"
                   placeholder="email"
                   className="peer input input-bordered"
@@ -59,9 +42,7 @@ const Register = () => {
                   <span className="label-text">Password</span>
                 </label>
                 <input
-                  onChange={(event) => {
-                    setRegisterPassword(event.target.value);
-                  }}
+                  onChange={(event) => {}}
                   type="password"
                   placeholder="password"
                   className="input input-bordered"
@@ -71,9 +52,7 @@ const Register = () => {
                 </label>
               </div>
               <div className="form-control mt-6">
-                <button onClick={register} className="btn btn-success">
-                  Register
-                </button>
+                <button className="btn btn-success">Register</button>
               </div>
             </div>
           </div>

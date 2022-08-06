@@ -1,21 +1,12 @@
 import { useState } from "react";
 import { HiMenu } from "react-icons/hi";
+import _ from 'lodash'
 import Link from "next/link";
 import Head from "next/head";
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import { auth } from "../firebase-config";
 import ThemeSelector from "./ThemeSelector";
 
 const Nav = ({ children }) => {
   const [user, setUser] = useState({});
-
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-  });
-
-  const logout = () => {
-    return signOut(auth);
-  };
 
   return (
     <>
@@ -59,17 +50,14 @@ const Nav = ({ children }) => {
             </div>
             <div className="flex-none">
               <div className="divider divider-horizontal hidden sm:block" />
-              {user === null ? (
+              {_.isEmpty(user) ? (
                 <button className="btn btn-outline btn-success btn-xs sm:btn-md">
                   <Link href="/login">
                     <a>Login</a>
                   </Link>
                 </button>
               ) : (
-                <button
-                  onClick={logout}
-                  className="btn btn-outline btn-error btn-xs sm:btn-md"
-                >
+                <button className="btn btn-outline btn-error btn-xs sm:btn-md">
                   Logout
                 </button>
               )}

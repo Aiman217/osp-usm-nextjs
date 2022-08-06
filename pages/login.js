@@ -1,8 +1,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { auth } from "../firebase-config";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { AiOutlineClose } from "react-icons/ai";
 
 const Login = () => {
@@ -10,15 +8,6 @@ const Login = () => {
   const [loginPassword, setLoginPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
-
-  const login = async () => {
-    try {
-      await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
-      router.push("/");
-    } catch (error) {
-      setError(error.message);
-    }
-  };
 
   return (
     <>
@@ -40,7 +29,7 @@ const Login = () => {
                 </label>
                 <input
                   onChange={(event) => {
-                    setLoginEmail(event.target.value);
+                    
                   }}
                   type="email"
                   placeholder="email"
@@ -56,7 +45,7 @@ const Login = () => {
                 </label>
                 <input
                   onChange={(event) => {
-                    setLoginPassword(event.target.value);
+                    
                   }}
                   type="password"
                   placeholder="password"
@@ -67,7 +56,7 @@ const Login = () => {
                 </label>
               </div>
               <div className="form-control mt-6">
-                <button onClick={login} className="btn btn-success">
+                <button className="btn btn-success">
                   Login
                 </button>
               </div>
