@@ -8,12 +8,12 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCfduDB_4ha6-Ms23qiAX-Vl5iOTeeOYxQ",
-  authDomain: "osp-usm-react.firebaseapp.com",
-  projectId: "osp-usm-react",
-  storageBucket: "osp-usm-react.appspot.com",
-  messagingSenderId: "589648208521",
-  appId: "1:589648208521:web:efb1a4b0751d2f493edc58"
+  apiKey: "AIzaSyAM8unlLw9FmUSCeQnvPmB3AMNvagbWOBs",
+  authDomain: "osp-usm-4d768.firebaseapp.com",
+  projectId: "osp-usm-4d768",
+  storageBucket: "osp-usm-4d768.appspot.com",
+  messagingSenderId: "647778548820",
+  appId: "1:647778548820:web:6dbc371314d0cb2d2881c1"
 };
 
 // Initialize Firebase
