@@ -89,7 +89,7 @@ const Discovery = () => {
                         )}
                       </td>
                       <td>
-                        <button className="btn gap-2">
+                        <button onClick={() => {window.open(item.url)}} className="btn gap-2">
                           <AiOutlineCloudDownload size={20} />
                           <p className="hidden sm:block">Download</p>
                         </button>

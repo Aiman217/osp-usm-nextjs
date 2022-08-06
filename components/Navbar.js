@@ -24,7 +24,6 @@ const Nav = ({ children }) => {
         <title>OSP@USM</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      {console.log(user)}
       <div className="drawer bg-base-200">
         <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col">
