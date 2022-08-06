@@ -2,8 +2,11 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { auth } from "/firebase-config";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { AiOutlineClose } from "react-icons/ai";
+import {
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+} from "firebase/auth";
+import { AiOutlineClose, AiOutlineGithub, AiOutlineGoogle } from "react-icons/ai";
 
 const Login = () => {
   const [loginEmail, setLoginEmail] = useState("");
@@ -20,20 +23,28 @@ const Login = () => {
     }
   };
 
+  const resetPassword = async (email) => {
+    try {
+      await sendPasswordResetEmail(auth, email);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
   return (
     <>
       <div className="hero h-screen py-2">
         <div className="hero-content flex-col sm:px-10 sm:flex-row-reverse">
           <div className="text-center sm:text-left">
-            <h1 className="text-2xl sm:text-4xl font-bold">Login now!</h1>
             <p className="hidden sm:block sm:text-2xl italic py-6">
               Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
               excepturi exercitationem quasi. In deleniti eaque aut repudiandae
               et a id nisi.
             </p>
           </div>
-          <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-            <div className="card-body py-4">
+          <div className="card card-compact flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+            <div className="card-body py-4 gap-4">
+              <h1 class="text-lg font-bold uppercase text-center">Login</h1>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
@@ -62,14 +73,32 @@ const Login = () => {
                   placeholder="password"
                   className="input input-bordered"
                 />
-                <label className="label">
-                  <Link href="/">Forget Password?</Link>
-                </label>
               </div>
-              <div className="form-control mt-6">
-                <button onClick={login} className="btn btn-success">
+              <div>
+                <h1
+                  onClick={() => {
+                    resetPassword(loginEmail);
+                  }}
+                  className="link text-error"
+                >
+                  Forgot password?
+                </h1>
+              </div>
+              <div className="form-control">
+                <button onClick={login} className="btn btn-block btn-success">
                   Login
                 </button>
+              </div>
+              <div className="flex flex-row justify-around items-center">
+                <div className="flex flex-row gap-2">
+                  <button className="btn-circle bg-base-300 text-white">
+                    <AiOutlineGithub size={40} className="mx-auto" />
+                  </button>
+                  <button className="btn-circle bg-base-300 text-white">
+                    <AiOutlineGoogle size={40} className="mx-auto" />
+                  </button>
+                </div>
+                <Link href="/register" className="cursor-pointer">Don't have an account?</Link>
               </div>
             </div>
           </div>
