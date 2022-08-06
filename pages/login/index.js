@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { auth } from "../firebase-config";
+import { auth } from "/firebase-config";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { AiOutlineClose } from "react-icons/ai";
 

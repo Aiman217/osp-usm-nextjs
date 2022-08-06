@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getDocs, collection } from "firebase/firestore";
-import { db } from "../firebase-config";
+import { db } from "/firebase-config";
 import { AiOutlineCloudDownload } from "react-icons/ai";
 import Moment from "moment";
 
@@ -89,7 +89,12 @@ const Discovery = () => {
                         )}
                       </td>
                       <td>
-                        <button onClick={() => {window.open(item.url)}} className="btn gap-2">
+                        <button
+                          onClick={() => {
+                            window.open(item.url);
+                          }}
+                          className="btn gap-2"
+                        >
                           <AiOutlineCloudDownload size={20} />
                           <p className="hidden sm:block">Download</p>
                         </button>
@@ -126,16 +131,16 @@ const Discovery = () => {
                 </thead>
                 <tbody>
                   {annLists.map((item, index) => (
-                    <tr key={index}>
-                      <th>{++index}</th>
-                      <td>{item.title}</td>
-                      <td>{item.desc.slice(0, 24) + "..."}</td>
-                      <td>
-                        {Moment.unix(item.created_at.seconds).format(
-                          "MMMM Do YYYY, h:mm:ss a"
-                        )}
-                      </td>
-                    </tr>
+                      <tr key={index}>
+                        <th>{++index}</th>
+                        <td>{item.title}</td>
+                        <td>{item.desc.slice(0, 24) + "..."}</td>
+                        <td>
+                          {Moment.unix(item.created_at.seconds).format(
+                            "MMMM Do YYYY, h:mm:ss a"
+                          )}
+                        </td>
+                      </tr>
                   ))}
                 </tbody>
               </table>
