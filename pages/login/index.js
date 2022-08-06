@@ -98,7 +98,7 @@ const Login = () => {
                     <AiOutlineGoogle size={40} className="mx-auto" />
                   </button>
                 </div>
-                <Link href="/register" className="cursor-pointer">Don&apos;'t have an account?</Link>
+                <Link href="/register" className="cursor-pointer">Don&apos;t have an account?</Link>
               </div>
             </div>
           </div>
