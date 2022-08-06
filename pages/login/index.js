@@ -44,7 +44,7 @@ const Login = () => {
           </div>
           <div className="card card-compact flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
             <div className="card-body py-4 gap-4">
-              <h1 class="text-lg font-bold uppercase text-center">Login</h1>
+              <h1 className="text-lg font-bold uppercase text-center">Login</h1>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
