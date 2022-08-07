@@ -7,6 +7,7 @@ import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
   GoogleAuthProvider,
+  GithubAuthProvider,
   signInWithRedirect,
   getRedirectResult,
 } from "firebase/auth";
@@ -42,6 +43,11 @@ const Login = () => {
     await signInWithRedirect(auth, GoogleProvider);
   };
 
+  const loginGithub = async () => {
+    const GithubProvider = new GithubAuthProvider();
+    await signInWithRedirect(auth, GithubProvider);
+  };
+
   const resetPassword = async (email) => {
     try {
       await sendPasswordResetEmail(auth, email);
@@ -66,7 +72,7 @@ const Login = () => {
           setError("");
         }, 4000);
       });
-  }, [loginGoogle]);
+  }, [loginGoogle, loginGithub]);
 
   return (
     <>
@@ -149,7 +155,10 @@ const Login = () => {
               </div>
               <div className="flex flex-col-reverse sm:flex-row justify-around items-center gap-2">
                 <div className="flex flex-row gap-2">
-                  <button className="btn-circle bg-base-300 text-white">
+                  <button
+                    onClick={loginGithub}
+                    className="btn-circle bg-base-300 text-white"
+                  >
                     <AiOutlineGithub size={30} className="mx-auto" />
                   </button>
                   <button
