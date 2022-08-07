@@ -29,7 +29,7 @@ const Login = () => {
   const loginEmailandPassword = async () => {
     try {
       await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
-      loginRedirect();
+      router.push("/");
     } catch (error) {
       setError(error.message);
       setTimeout(() => {
