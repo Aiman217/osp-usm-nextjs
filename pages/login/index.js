@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import _ from "lodash";
 import { useRouter } from "next/router";
@@ -6,6 +6,9 @@ import { auth } from "/firebase-config";
 import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
+  GoogleAuthProvider,
+  signInWithRedirect,
+  getRedirectResult,
 } from "firebase/auth";
 import {
   AiOutlineClose,
@@ -22,16 +25,21 @@ const Login = () => {
   const [show, setShow] = useState(false);
   const router = useRouter();
 
-  const login = async () => {
+  const loginEmailandPassword = async () => {
     try {
       await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
-      router.push("/");
+      loginRedirect();
     } catch (error) {
       setError(error.message);
       setTimeout(() => {
         setError("");
       }, 4000);
     }
+  };
+
+  const loginGoogle = async () => {
+    const GoogleProvider = new GoogleAuthProvider();
+    await signInWithRedirect(auth, GoogleProvider);
   };
 
   const resetPassword = async (email) => {
@@ -44,6 +52,21 @@ const Login = () => {
       }, 4000);
     }
   };
+
+  useEffect(() => {
+    getRedirectResult(auth)
+      .then((result) => {
+        if (result) {
+          router.push("/");
+        }
+      })
+      .catch((error) => {
+        setError(error.message);
+        setTimeout(() => {
+          setError("");
+        }, 4000);
+      });
+  }, [loginGoogle]);
 
   return (
     <>
@@ -117,7 +140,10 @@ const Login = () => {
                 </h1>
               </div>
               <div className="form-control">
-                <button onClick={login} className="btn btn-block btn-success">
+                <button
+                  onClick={loginEmailandPassword}
+                  className="btn btn-block btn-success"
+                >
                   Login
                 </button>
               </div>
@@ -126,7 +152,10 @@ const Login = () => {
                   <button className="btn-circle bg-base-300 text-white">
                     <AiOutlineGithub size={30} className="mx-auto" />
                   </button>
-                  <button className="btn-circle bg-base-300 text-white">
+                  <button
+                    onClick={loginGoogle}
+                    className="btn-circle bg-base-300 text-white"
+                  >
                     <AiOutlineGoogle size={30} className="mx-auto" />
                   </button>
                 </div>
