@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import _ from "lodash";
 import { useRouter } from "next/router";
@@ -13,7 +13,9 @@ import {
 const Register = () => {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
+  const [registerConfirmPassword, setRegisterConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const [samePass, setSamePass] = useState(false);
   const [show, setShow] = useState(false);
   const router = useRouter();
 
@@ -32,6 +34,14 @@ const Register = () => {
       }, 4000);
     }
   };
+
+  useEffect(() => {
+    if (!(_.isEmpty(registerPassword))) {
+      registerPassword === registerConfirmPassword
+        ? setSamePass(true)
+        : setSamePass(false);
+    }
+  }, [registerPassword, registerConfirmPassword]);
 
   return (
     <>
@@ -93,11 +103,47 @@ const Register = () => {
                     />
                   </label>
                 </div>
+                <label className="label">
+                  <span className="label-text">Confirm Password</span>
+                </label>
+                <input
+                  onChange={(event) => {
+                    setRegisterConfirmPassword(event.target.value);
+                  }}
+                  type={show ? "text" : "password"}
+                  placeholder="password"
+                  className="input input-bordered"
+                />
+                {!samePass ? (
+                  <p className="mt-2 visible static text-error text-xs ">
+                    Password is not the same.
+                  </p>
+                ) : (
+                  []
+                )}
+                <div className=" absolute inset-y-0 right-0 translate-y-[285px] -translate-x-6">
+                  <label className="swap">
+                    <input type="checkbox" />
+                    <AiOutlineEye
+                      size={20}
+                      className="swap-on"
+                      onClick={() => setShow(true)}
+                    />
+                    <AiOutlineEyeInvisible
+                      size={20}
+                      className="swap-off"
+                      onClick={() => setShow(false)}
+                    />
+                  </label>
+                </div>
               </div>
               <div className="form-control">
                 <button
                   onClick={register}
-                  className="btn btn-block btn-success mt-6"
+                  className={
+                    "btn btn-block btn-success mt-6 " +
+                    (samePass ? " " : "btn-disabled")
+                  }
                 >
                   Register
                 </button>
