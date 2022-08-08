@@ -1,6 +1,8 @@
 const About = () => {
   return (
-    <div>About</div>
+    <div className="py-4 w-[90%] sm:w-[80%]">
+      <h1>About</h1>
+    </div>
   )
 }
 

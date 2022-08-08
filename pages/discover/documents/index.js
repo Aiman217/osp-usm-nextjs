@@ -39,7 +39,7 @@ const Documents = () => {
 
   return (
     <>
-      <div className="w-[90%]">
+      <div className="py-4 w-[90%] sm:w-[80%]">
         <h2 className="bg-base-100 rounded-full px-3 py-1 text-lg text-center mb-4 font-bold">
           Important Documents
         </h2>
