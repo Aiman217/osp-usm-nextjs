@@ -26,8 +26,8 @@ const Nav = ({ children }) => {
       </Head>
       <div className="drawer bg-base-200">
         <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content grid grid-flow-row auto-rows-max">
-          <div className="navbar w-full bg-base-100 px-4 shadow-sm shadow-neutral">
+        <div className="drawer-content flex flex-col min-h-screen">
+          <div className="navbar bg-base-100 px-4 shadow-sm shadow-neutral">
             <div className="flex-none sm:hidden">
               <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
                 <HiMenu htmlFor="my-drawer-3" size={25} />
@@ -77,7 +77,7 @@ const Nav = ({ children }) => {
             </div>
           </div>
           {/* Content of each page appear here */}
-          <div className="flex justify-center overflow-x-auto w-full min-h-[calc(100vh-20%)]">{children}</div>
+          <div className="flex grow justify-center overflow-x-auto">{children}</div>
           {/* Content of each page end here */}
         </div>
         <div className="drawer-side">
