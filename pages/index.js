@@ -3,8 +3,8 @@ import Link from "next/link";
 export default function Home() {
   return (
     <>
-      <div className="flex items-center w-[90%] sm:w-[80%]">
-        <div className="hero">
+      <div className="flex justify-center items-center h-full">
+        <div className="hero w-[90%] sm:w-[80%]">
           <div className="hero-content text-center">
             <div className="max-w-xl sm:bg-base-200 sm:bg-opacity-70 sm:rounded-lg sm:p-4">
               <h1 className="text-2xl sm:text-4xl font-bold">

@@ -77,7 +77,7 @@ const Nav = ({ children }) => {
             </div>
           </div>
           {/* Content of each page appear here */}
-          <div className="flex grow justify-center overflow-x-auto">{children}</div>
+          <div className="grow overflow-auto">{children}</div>
           {/* Content of each page end here */}
         </div>
         <div className="drawer-side">

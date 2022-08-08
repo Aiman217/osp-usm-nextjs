@@ -77,120 +77,115 @@ const Login = () => {
 
   return (
     <>
-      <div className="hero">
-        <div className="hero-content w-full flex-col sm:px-10 sm:flex-row-reverse">
-          <div className="text-center sm:text-left">
-            <p className="hidden sm:block sm:text-2xl italic">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
-            </p>
-          </div>
-          <div className="card card-compact flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-            <div className="card-body">
-              <div className="form-control">
-                <h1 className="text-lg font-bold uppercase text-center">
-                  Login
-                </h1>
-                <div className="divider p-0 m-0"></div>
-                <label className="label">
-                  <span className="label-text">Email</span>
-                </label>
-                <input
-                  onChange={(event) => {
-                    setLoginEmail(event.target.value);
-                  }}
-                  type="email"
-                  placeholder="email"
-                  className="peer input input-bordered"
-                />
-                <p className="mt-2 invisible absolute peer-invalid:visible text-error text-xs peer-invalid:static">
-                  Please provide a valid email address.
-                </p>
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Password</span>
-                </label>
-                <input
-                  onChange={(event) => {
-                    setLoginPassword(event.target.value);
-                  }}
-                  type={show ? "text" : "password"}
-                  placeholder="password"
-                  className="input input-bordered"
-                />
-                <div className=" absolute inset-y-0 right-0 translate-y-[200px] -translate-x-6">
-                  <label className="swap">
-                    <input type="checkbox" />
-                    <AiOutlineEye
-                      size={20}
-                      className="swap-on"
-                      onClick={() => setShow(true)}
-                    />
-                    <AiOutlineEyeInvisible
-                      size={20}
-                      className="swap-off"
-                      onClick={() => setShow(false)}
-                    />
+      <div className="flex justify-center items-center h-full sm:bg-[url('/login_bg.png')] bg-contain">
+        <div className="hero sm:backdrop-brightness-50 h-full">
+          <div className="hero-content w-full flex-col sm:px-10 sm:flex-row-reverse">
+            <div className="card card-compact flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+              <div className="card-body">
+                <div className="form-control">
+                  <h1 className="text-lg font-bold uppercase text-center">
+                    Login
+                  </h1>
+                  <div className="divider p-0 m-0"></div>
+                  <label className="label">
+                    <span className="label-text">Email</span>
                   </label>
+                  <input
+                    onChange={(event) => {
+                      setLoginEmail(event.target.value);
+                    }}
+                    type="email"
+                    placeholder="email"
+                    className="peer input input-bordered"
+                  />
+                  <p className="mt-2 invisible absolute peer-invalid:visible text-error text-xs peer-invalid:static">
+                    Please provide a valid email address.
+                  </p>
+                </div>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Password</span>
+                  </label>
+                  <input
+                    onChange={(event) => {
+                      setLoginPassword(event.target.value);
+                    }}
+                    type={show ? "text" : "password"}
+                    placeholder="password"
+                    className="input input-bordered"
+                  />
+                  <div className=" absolute inset-y-0 right-0 translate-y-[200px] -translate-x-6">
+                    <label className="swap">
+                      <input type="checkbox" />
+                      <AiOutlineEye
+                        size={20}
+                        className="swap-on"
+                        onClick={() => setShow(true)}
+                      />
+                      <AiOutlineEyeInvisible
+                        size={20}
+                        className="swap-off"
+                        onClick={() => setShow(false)}
+                      />
+                    </label>
+                  </div>
+                </div>
+                <div>
+                  <h1
+                    onClick={() => {
+                      resetPassword(loginEmail);
+                    }}
+                    className="link text-error"
+                  >
+                    Forgot password?
+                  </h1>
+                </div>
+                <div className="form-control">
+                  <button
+                    onClick={loginEmailandPassword}
+                    className="btn btn-block btn-success"
+                  >
+                    Login
+                  </button>
+                </div>
+                <div className="flex flex-col-reverse sm:flex-row justify-around items-center gap-2">
+                  <div className="flex flex-row gap-2">
+                    <button
+                      onClick={loginGithub}
+                      className="btn-circle bg-base-300 text-white"
+                    >
+                      <AiOutlineGithub size={30} className="mx-auto" />
+                    </button>
+                    <button
+                      onClick={loginGoogle}
+                      className="btn-circle bg-base-300 text-white"
+                    >
+                      <AiOutlineGoogle size={30} className="mx-auto" />
+                    </button>
+                  </div>
+                  <Link href="/register" className="cursor-pointer">
+                    Don&apos;t have an account?
+                  </Link>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+        {!_.isEmpty(error) && (
+          <div className="toast sm:mr-4">
+            <div className="alert alert-error shadow-lg">
               <div>
-                <h1
-                  onClick={() => {
-                    resetPassword(loginEmail);
-                  }}
-                  className="link text-error"
-                >
-                  Forgot password?
-                </h1>
-              </div>
-              <div className="form-control">
-                <button
-                  onClick={loginEmailandPassword}
-                  className="btn btn-block btn-success"
-                >
-                  Login
-                </button>
-              </div>
-              <div className="flex flex-col-reverse sm:flex-row justify-around items-center gap-2">
-                <div className="flex flex-row gap-2">
-                  <button
-                    onClick={loginGithub}
-                    className="btn-circle bg-base-300 text-white"
-                  >
-                    <AiOutlineGithub size={30} className="mx-auto" />
-                  </button>
-                  <button
-                    onClick={loginGoogle}
-                    className="btn-circle bg-base-300 text-white"
-                  >
-                    <AiOutlineGoogle size={30} className="mx-auto" />
-                  </button>
-                </div>
-                <Link href="/register" className="cursor-pointer">
-                  Don&apos;t have an account?
-                </Link>
+                <span>{error}</span>
+                <AiOutlineClose
+                  onClick={() => setError("")}
+                  size={20}
+                  className="text-white cursor-pointer"
+                />
               </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
-      {!_.isEmpty(error) && (
-        <div className="toast sm:mr-4">
-          <div className="alert alert-error shadow-lg">
-            <div>
-              <span>{error}</span>
-              <AiOutlineClose
-                onClick={() => setError("")}
-                size={20}
-                className="text-white cursor-pointer"
-              />
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 };

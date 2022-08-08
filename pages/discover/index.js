@@ -2,47 +2,59 @@ import Link from "next/link";
 import Image from "next/image";
 
 const Discover = () => {
+  const topicList = [
+    {
+      title: "Documents",
+      desc: "Find all important documents related with USM.",
+      src_img: "/doc_bg.png",
+      href: "/discover/documents",
+    },
+    {
+      title: "Announcements",
+      desc: "Find all important announcements related with USM.",
+      src_img: "/ann_bg.png",
+      href: "/discover/announcements",
+    },
+    {
+      title: "Documents",
+      desc: "Find all important documents related with USM.",
+      src_img: "/doc_bg.png",
+      href: "/discover/documents",
+    },
+    {
+      title: "Announcements",
+      desc: "Find all important announcements related with USM.",
+      src_img: "/ann_bg.png",
+      href: "/discover/announcements",
+    },
+  ];
   return (
     <>
-      <div className="py-4 grid grid-rows-2 sm:grid-cols-2 gap-4 w-[90%] sm:w-[80%]">
-        <div className="card bg-base-100 shadow-xl image-full">
-          <figure>
-            <Image
-              src="/doc_bg.png"
-              layout="fill"
-              objectFit="cover"
-              alt="Doc Background"
-            />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title">Documents</h2>
-            <p>Find all important documents related with USM.</p>
-            <div className="card-actions justify-end">
-              <button className="btn btn-primary">
-                <Link href="/discover/documents">Go to Page</Link>
-              </button>
+      <div className="py-4 flex flex-col justify-center items-center gap-4">
+        {topicList.map((item, index) => (
+          <div
+            key={index}
+            className="card bg-base-100 shadow-xl image-full w-[90%] sm:w-[80%]"
+          >
+            <figure>
+              <Image
+                src={item.src_img}
+                layout="fill"
+                objectFit="cover"
+                alt="Doc Background"
+              />
+            </figure>
+            <div className="card-body">
+              <h2 className="card-title">{item.title}</h2>
+              <p>{item.desc}</p>
+              <div className="card-actions justify-end">
+                <button className="btn btn-primary">
+                  <Link href={item.href}>Go to Page</Link>
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="card bg-base-100 shadow-xl image-full">
-          <figure>
-            <Image
-              src="/ann_bg.png"
-              layout="fill"
-              objectFit="cover"
-              alt="Ann Background"
-            />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title">Announcements</h2>
-            <p>Find all important announcements related with USM.</p>
-            <div className="card-actions justify-end">
-              <button className="btn btn-primary">
-                <Link href="/discover/announcements">Go to Page</Link>
-              </button>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
     </>
   );
