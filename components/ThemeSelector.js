@@ -2,6 +2,38 @@ import { useEffect } from "react";
 import { themeChange } from "theme-change";
 
 const ThemeSelector = (props) => {
+  const themeList = [
+    "light",
+    "dark",
+    "cupcake",
+    "bumblebee",
+    "emerald",
+    "corporate",
+    "synthwave",
+    "retro",
+    "cyberpunk",
+    "valentine",
+    "halloween",
+    "garden",
+    "forest",
+    "aqua",
+    "lofi",
+    "pastel",
+    "fantasy",
+    "wireframe",
+    "black",
+    "luxury",
+    "dracula",
+    "cmyk",
+    "autumn",
+    "business",
+    "acid",
+    "lemonade",
+    "night",
+    "coffee",
+    "winter",
+  ];
+
   useEffect(() => {
     themeChange(false);
   }, []);
@@ -14,10 +46,12 @@ const ThemeSelector = (props) => {
       >
         <option disabled>Pick your theme</option>
         <option value="">Default</option>
-        <option value="light">Light</option>
-        <option value="dark">Dark</option>
-        <option value="synthwave">Synthwave</option>
-        <option value="halloween">Halloween</option>
+        {themeList?.map((item, index) => (
+          <option key={index} value={item}>
+            {item}
+            {console.log(typeof item)}
+          </option>
+        ))}
       </select>
     </>
   );
