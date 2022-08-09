@@ -6,7 +6,6 @@ import Moment from "moment";
 
 const Documents = () => {
   const [docLists, setDocLists] = useState([]);
-  const [annLists, setAnnLists] = useState([]);
 
   useEffect(() => {
     // Fetch documents
@@ -22,19 +21,6 @@ const Documents = () => {
     };
     getDocuments();
     // Finish fetching documents
-    // Fetch announcements
-    const annCollectionRef = collection(db, "announcements");
-    const getAnn = async () => {
-      const dataAnn = await getDocs(annCollectionRef);
-      setAnnLists(
-        dataAnn.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }))
-      );
-    };
-    getAnn();
-    // Finish fetching announcements
   }, []);
 
   return (
