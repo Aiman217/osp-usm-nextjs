@@ -47,9 +47,8 @@ const ThemeSelector = (props) => {
         <option disabled>Pick your theme</option>
         <option value="">Default</option>
         {themeList?.map((item, index) => (
-          <option key={index} value={item}>
+          <option key={index} value={item} className="capitalize">
             {item}
-            {console.log(typeof item)}
           </option>
         ))}
       </select>
