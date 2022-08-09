@@ -15,18 +15,6 @@ const Discover = () => {
       src_img: "/ann_bg.png",
       href: "/discover/announcements",
     },
-    {
-      title: "Documents",
-      desc: "Find all important documents related with USM.",
-      src_img: "/doc_bg.png",
-      href: "/discover/documents",
-    },
-    {
-      title: "Announcements",
-      desc: "Find all important announcements related with USM.",
-      src_img: "/ann_bg.png",
-      href: "/discover/announcements",
-    },
   ];
   return (
     <>
