@@ -56,6 +56,11 @@ const Nav = ({ children }) => {
                     <a>Discover</a>
                   </Link>
                 </li>
+                <li className="uppercase font-bold">
+                  <Link href="/cms">
+                    <a>CMS</a>
+                  </Link>
+                </li>
               </ul>
             </div>
             <div className="flex-none">
@@ -102,6 +107,11 @@ const Nav = ({ children }) => {
               <li className="uppercase font-bold text-sm">
                 <Link href="/discover">
                   <a>Discover</a>
+                </Link>
+              </li>
+              <li className="uppercase font-bold text-sm">
+                <Link href="/cms">
+                  <a>CMS</a>
                 </Link>
               </li>
             </ul>
