@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { HiMenu } from "react-icons/hi";
 import Link from "next/link";
 import Head from "next/head";
@@ -77,7 +77,7 @@ const Nav = ({ children }) => {
             </div>
           </div>
           {/* Content of each page appear here */}
-          <div className="grow overflow-auto">{children}</div>
+          <div className="grow overflow-auto">{React.cloneElement(children, {user: user})}</div>
           {/* Content of each page end here */}
         </div>
         <div className="drawer-side">
