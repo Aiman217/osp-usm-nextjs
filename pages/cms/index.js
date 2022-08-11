@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import _ from "lodash";
 import { useRouter } from "next/router";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp, getDoc, doc } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
+import { onAuthStateChanged } from "firebase/auth";
 import uniqid from 'uniqid';
-import { db, storage } from "/firebase-config";
+import { auth, db, storage } from "/firebase-config";
 import { AiOutlineClose } from "react-icons/ai";
 
 const CMS = ({ user }) => {
@@ -15,7 +15,7 @@ const CMS = ({ user }) => {
   const router = useRouter();
 
   const addDocument = async (url) => {
-    const dataDoc = await addDoc(collection(db, "documents"), {
+    await addDoc(collection(db, "documents"), {
       name: name,
       created_at: serverTimestamp(),
       url: url,
@@ -31,6 +31,22 @@ const CMS = ({ user }) => {
       });
     });
   };
+
+  useEffect(() => {
+    const getAdmins = async (uid) => {
+      const dataAdmins = await getDoc(doc(db, "admins", uid));
+      if (!dataAdmins.exists()) {
+        router.push("/")
+      }
+    };
+    onAuthStateChanged(auth, (currentUser) => {
+      if (!_.isEmpty(currentUser)) {
+        getAdmins(currentUser?.uid);
+      } else {
+        router.push("/")
+      }
+    });
+  }, [user])
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
