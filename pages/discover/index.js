@@ -24,12 +24,13 @@ const Discover = () => {
             key={index}
             className="card bg-base-100 shadow-xl image-full w-[90%] sm:w-[80%]"
           >
-            <figure>
+            <figure className="relative">
               <Image
                 src={item.src_img}
                 layout="fill"
                 objectFit="cover"
                 alt="Doc Background"
+                priority
               />
             </figure>
             <div className="card-body">

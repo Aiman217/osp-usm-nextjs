@@ -3,22 +3,33 @@ import Link from "next/link";
 import _ from "lodash";
 import { useRouter } from "next/router";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { db } from "/firebase-config";
+import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
+import uniqid from 'uniqid';
+import { db, storage } from "/firebase-config";
 import { AiOutlineClose } from "react-icons/ai";
 
 const CMS = ({ user }) => {
-  const [title, setTitle] = useState("");
+  const [name, setName] = useState("");
   const [document, setDocument] = useState(null);
   const [error, setError] = useState("");
   const router = useRouter();
 
-  const addDocument = async () => {
+  const addDocument = async (url) => {
     const dataDoc = await addDoc(collection(db, "documents"), {
-      title: title,
+      name: name,
       created_at: serverTimestamp(),
-      url: "https://api.lorem.space/image/album?w=150&h=150",
+      url: url,
     });
-    console.log(dataDoc.id);
+  };
+
+  const uploadFile = () => {
+    if (setDocument == null) return;
+    const documentUploadRef = ref(storage, `documents/${uniqid(document.name)}`);
+    uploadBytes(documentUploadRef, document).then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((url) => {
+        addDocument(url);
+      });
+    });
   };
 
   useEffect(() => {
@@ -27,7 +38,6 @@ const CMS = ({ user }) => {
 
   return (
     <>
-      {console.log(user, title, document, serverTimestamp())}
       <div className="py-4 flex flex-col justify-center items-center gap-4">
         <div className="w-[90%] sm:w-[80%]">
           <div className="w-full flex-col sm:flex-row-reverse">
@@ -43,7 +53,7 @@ const CMS = ({ user }) => {
                   </label>
                   <input
                     onChange={(event) => {
-                      setTitle(event.target.value);
+                      setName(event.target.value);
                     }}
                     type="text"
                     placeholder="name"
@@ -54,7 +64,7 @@ const CMS = ({ user }) => {
                   </label>
                   <input
                     onChange={(event) => {
-                      setDocument(event.target.value);
+                      setDocument(event.target.files[0]);
                     }}
                     type="file"
                     accept="application/pdf"
@@ -62,7 +72,7 @@ const CMS = ({ user }) => {
                 </div>
                 <div className="form-control">
                   <button
-                    onClick={addDocument}
+                    onClick={uploadFile}
                     className="btn btn-block btn-success mt-6"
                   >
                     Login
