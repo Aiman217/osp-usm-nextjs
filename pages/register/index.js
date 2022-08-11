@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import _ from "lodash";
 import { useRouter } from "next/router";
-import { auth } from "/firebase-config";
+import { auth, db } from "/firebase-config";
+import { doc, setDoc } from "firebase/firestore";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import {
   AiOutlineClose,
@@ -25,14 +26,22 @@ const Register = () => {
         auth,
         registerEmail,
         registerPassword
-      );
-      router.push("/");
+      ).then((cred) => {
+        addUser(cred.user.uid);
+        router.push("/");
+      });
     } catch (error) {
       setError(error.message);
       setTimeout(() => {
         setError("");
       }, 4000);
     }
+  };
+
+  const addUser = async (uid) => {
+    await setDoc(doc(db, "users", uid), {
+      role: "user",
+    });
   };
 
   useEffect(() => {
