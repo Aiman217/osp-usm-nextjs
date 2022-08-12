@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { HiMenu } from "react-icons/hi";
 import Link from "next/link";
-import Head from "next/head";
 import _ from "lodash";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../firebase-config";
@@ -20,10 +19,6 @@ const Nav = ({ children }) => {
 
   return (
     <>
-      <Head>
-        <title>OSP@USM</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head>
       <div className="drawer bg-base-200">
         <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col min-h-screen">

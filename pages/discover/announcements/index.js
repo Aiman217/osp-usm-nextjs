@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getDocs, collection } from "firebase/firestore";
 import _ from "lodash";
+import Head from "next/head";
 import { db } from "/firebase-config";
 import { AiOutlineRead, AiOutlineClose } from "react-icons/ai";
 import Moment from "moment";
@@ -27,6 +28,10 @@ const Documents = () => {
 
   return (
     <>
+      <Head>
+        <title>OSP@USM | Announcements</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <div className="py-4 flex flex-col justify-center items-center gap-4">
         <div className="w-[90%] sm:w-[80%]">
           <h2 className="bg-base-100 rounded-full px-3 py-1 text-lg text-center mb-4 font-bold">

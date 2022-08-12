@@ -1,10 +1,17 @@
 import { useEffect, useState } from "react";
 import _ from "lodash";
 import { useRouter } from "next/router";
-import { collection, addDoc, serverTimestamp, getDoc, doc } from "firebase/firestore";
+import Head from "next/head";
+import {
+  collection,
+  addDoc,
+  serverTimestamp,
+  getDoc,
+  doc,
+} from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { onAuthStateChanged } from "firebase/auth";
-import uniqid from 'uniqid';
+import uniqid from "uniqid";
 import { auth, db, storage } from "/firebase-config";
 import { AiOutlineClose } from "react-icons/ai";
 
@@ -24,7 +31,10 @@ const CMS = ({ user }) => {
 
   const uploadFile = () => {
     if (setDocument == null) return;
-    const documentUploadRef = ref(storage, `documents/${uniqid(document.name)}`);
+    const documentUploadRef = ref(
+      storage,
+      `documents/${uniqid(document.name)}`
+    );
     uploadBytes(documentUploadRef, document).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
         addDocument(url);
@@ -36,17 +46,17 @@ const CMS = ({ user }) => {
     const getAdmins = async (uid) => {
       const dataAdmins = await getDoc(doc(db, "admins", uid));
       if (!dataAdmins.exists()) {
-        router.push("/")
+        router.push("/");
       }
     };
     onAuthStateChanged(auth, (currentUser) => {
       if (!_.isEmpty(currentUser)) {
         getAdmins(currentUser?.uid);
       } else {
-        router.push("/")
+        router.push("/");
       }
     });
-  }, [user])
+  }, [user]);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -54,6 +64,10 @@ const CMS = ({ user }) => {
 
   return (
     <>
+      <Head>
+        <title>OSP@USM | CMS</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <div className="py-4 flex flex-col justify-center items-center gap-4">
         <div className="w-[90%] sm:w-[80%]">
           <div className="w-full flex-col sm:flex-row-reverse">

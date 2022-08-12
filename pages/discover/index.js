@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Head from "next/head";
 import Image from "next/image";
 
 const Discover = () => {
@@ -18,6 +19,10 @@ const Discover = () => {
   ];
   return (
     <>
+      <Head>
+        <title>OSP@USM | Discovery</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <div className="py-4 flex flex-col justify-center items-center gap-4">
         {topicList.map((item, index) => (
           <div

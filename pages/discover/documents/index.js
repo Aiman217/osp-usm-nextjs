@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Head from "next/head";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "/firebase-config";
 import { AiOutlineCloudDownload } from "react-icons/ai";
@@ -25,6 +26,10 @@ const Documents = () => {
 
   return (
     <>
+      <Head>
+        <title>OSP@USM | Documents</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <div className="py-4 flex flex-col justify-center items-center gap-4">
         <div className="w-[90%] sm:w-[80%]">
           <h2 className="bg-base-100 rounded-full px-3 py-1 text-lg text-center mb-4 font-bold">

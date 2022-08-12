@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import _ from "lodash";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { auth } from "/firebase-config";
 import {
@@ -77,6 +78,10 @@ const Login = () => {
 
   return (
     <>
+      <Head>
+        <title>OSP@USM | Login</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <div className="flex justify-center items-center h-full sm:bg-[url('/login_bg.png')] bg-contain">
         <div className="hero sm:backdrop-brightness-50 h-full">
           <div className="hero-content w-full flex-col sm:px-10 sm:flex-row-reverse">

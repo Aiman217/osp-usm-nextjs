@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Head from "next/head";
 import _ from "lodash";
 import { useRouter } from "next/router";
 import { auth, db } from "/firebase-config";
@@ -54,6 +55,10 @@ const Register = () => {
 
   return (
     <>
+      <Head>
+        <title>OSP@USM | Register</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <div className="flex justify-center items-center h-full sm:bg-[url('/login_bg.png')] bg-contain">
         <div className="hero sm:backdrop-brightness-50 h-full">
           <div className="hero-content w-full flex-col sm:px-10 sm:flex-row-reverse">
