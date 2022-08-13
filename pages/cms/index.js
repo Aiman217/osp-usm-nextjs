@@ -33,6 +33,7 @@ const CMS = ({ user }) => {
         router.push("/");
       }
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   useEffect(() => {
@@ -62,10 +63,6 @@ const CMS = ({ user }) => {
     };
     getDocuments();
     // Finish fetching documents
-  }, []);
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

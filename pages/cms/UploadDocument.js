@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
+import _ from 'lodash'
 import uniqid from "uniqid";
 import { db, storage } from "/firebase-config";
 import { AiOutlineClose } from "react-icons/ai";
