@@ -18,7 +18,7 @@ import { AiOutlineClose } from "react-icons/ai";
 const CMS = ({ user }) => {
   const [name, setName] = useState("");
   const [document, setDocument] = useState(null);
-  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const router = useRouter();
 
   const addDocument = async (url) => {
@@ -26,6 +26,13 @@ const CMS = ({ user }) => {
       name: name,
       created_at: serverTimestamp(),
       url: url,
+    }).then((resp) => {
+      if (resp.id) {
+        setSuccess("Successfully upload document.");
+        setTimeout(() => {
+          setSuccess("");
+        }, 4000);
+      }
     });
   };
 
@@ -33,7 +40,7 @@ const CMS = ({ user }) => {
     if (setDocument == null) return;
     const documentUploadRef = ref(
       storage,
-      `documents/${uniqid(document.name)}`
+      `documents/${uniqid(document?.name)}`
     );
     uploadBytes(documentUploadRef, document).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
@@ -103,22 +110,25 @@ const CMS = ({ user }) => {
                 <div className="form-control">
                   <button
                     onClick={uploadFile}
-                    className="btn btn-block btn-success mt-6"
+                    className={
+                      "btn btn-block btn-success mt-6 " +
+                      (document ? " " : "btn-disabled")
+                    }
                   >
-                    Login
+                    Upload
                   </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        {!_.isEmpty(error) && (
+        {!_.isEmpty(success) && (
           <div className="toast sm:mr-4">
-            <div className="alert alert-error shadow-lg">
+            <div className="alert alert-success shadow-lg">
               <div>
-                <span>{error}</span>
+                <span>{success}</span>
                 <AiOutlineClose
-                  onClick={() => setError("")}
+                  onClick={() => setSuccess("")}
                   size={20}
                   className="text-white cursor-pointer"
                 />
