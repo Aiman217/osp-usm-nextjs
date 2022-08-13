@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
-import _ from 'lodash'
+import _ from "lodash";
 import uniqid from "uniqid";
 import { db, storage } from "/firebase-config";
 import { AiOutlineClose } from "react-icons/ai";
@@ -12,17 +12,21 @@ const UploadDocument = () => {
   const [success, setSuccess] = useState("");
 
   const addDocument = async (url) => {
-    await addDoc(collection(db, "documents"), {
-      name: name,
-      created_at: serverTimestamp(),
-      url: url,
-    }).then((resp) => {
-      if (resp.id) {
-        setSuccess("Successfully upload document.");
-        setTimeout(() => {
-          setSuccess("");
-        }, 4000);
-      }
+    await setDoc(
+      doc(db, "contents", "documents"),
+      {
+        [uniqid()]: {
+          name: name,
+          created_at: serverTimestamp(),
+          url: url,
+        },
+      },
+      { merge: true }
+    ).then(() => {
+      setSuccess("Successfully upload document.");
+      setTimeout(() => {
+        setSuccess("");
+      }, 4000);
     });
   };
 
@@ -83,7 +87,7 @@ const UploadDocument = () => {
         <div className="toast">
           <div className="alert alert-success shadow-lg">
             <div>
-              <span>{success}</span>
+              <span className="text-sm sm:text-base">{success}</span>
               <AiOutlineClose
                 onClick={() => setSuccess("")}
                 size={20}
