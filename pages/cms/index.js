@@ -4,50 +4,20 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import {
   collection,
-  addDoc,
-  serverTimestamp,
   getDoc,
   doc,
+  getDocs,
 } from "firebase/firestore";
-import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { onAuthStateChanged } from "firebase/auth";
-import uniqid from "uniqid";
-import { auth, db, storage } from "/firebase-config";
+import { auth, db } from "/firebase-config";
 import { AiOutlineClose } from "react-icons/ai";
+import UploadDocument from "./UploadDocument";
 
 const CMS = ({ user }) => {
-  const [name, setName] = useState("");
-  const [document, setDocument] = useState(null);
-  const [success, setSuccess] = useState("");
+  const [annLists, setAnnLists] = useState([]);
+  const [docLists, setDocLists] = useState([]);
+  const [topicSelect, setTopicSelect] = useState("");
   const router = useRouter();
-
-  const addDocument = async (url) => {
-    await addDoc(collection(db, "documents"), {
-      name: name,
-      created_at: serverTimestamp(),
-      url: url,
-    }).then((resp) => {
-      if (resp.id) {
-        setSuccess("Successfully upload document.");
-        setTimeout(() => {
-          setSuccess("");
-        }, 4000);
-      }
-    });
-  };
-
-  const uploadFile = () => {
-    if (setDocument == null) return;
-    const documentUploadRef = ref(
-      storage,
-      `documents/${uniqid(document?.name)}`
-    );
-    uploadBytes(documentUploadRef, document).then((snapshot) => {
-      getDownloadURL(snapshot.ref).then((url) => {
-        addDocument(url);
-      });
-    });
-  };
 
   useEffect(() => {
     const getAdmins = async (uid) => {
@@ -66,6 +36,35 @@ const CMS = ({ user }) => {
   }, [user]);
 
   useEffect(() => {
+    // Fetch announcements
+    const annCollectionRef = collection(db, "announcements");
+    const getAnn = async () => {
+      const dataAnn = await getDocs(annCollectionRef);
+      setAnnLists(
+        dataAnn.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }))
+      );
+    };
+    getAnn();
+    // Finish fetching announcements
+    // Fetch documents
+    const docCollectionRef = collection(db, "documents");
+    const getDocuments = async () => {
+      const dataDoc = await getDocs(docCollectionRef);
+      setDocLists(
+        dataDoc.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }))
+      );
+    };
+    getDocuments();
+    // Finish fetching documents
+  }, []);
+
+  useEffect(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -77,61 +76,58 @@ const CMS = ({ user }) => {
       </Head>
       <div className="py-4 flex flex-col justify-center items-center gap-4">
         <div className="w-[90%] sm:w-[80%]">
-          <div className="w-full flex-col sm:flex-row-reverse">
-            <div className="card flex-shrink-0 w-full shadow-2xl bg-base-100">
-              <div className="card-body w-full">
-                <div className="form-control">
-                  <h1 className="text-lg font-bold uppercase text-center">
-                    Upload Document
-                  </h1>
-                  <div className="divider p-0 m-0"></div>
-                  <label className="label">
-                    <span className="label-text">Name</span>
-                  </label>
-                  <input
-                    onChange={(event) => {
-                      setName(event.target.value);
+          <div className="w-full flex flex-col sm:flex-row justify-center">
+            <div className="stats shadow stats-vertical sm:stats-horizontal">
+              <div className="stat place-items-center">
+                <div className="stat-title">Total Announcements</div>
+                <div className="stat-value">{annLists?.length}</div>
+                <div className="stat-actions">
+                  <label
+                    htmlFor="my-modal-topic"
+                    className="btn btn-sm btn-success modal-button"
+                    onClick={() => {
+                      setTopicSelect("announcement");
                     }}
-                    type="text"
-                    placeholder="name"
-                    className="input input-bordered"
-                  />
-                  <label className="label">
-                    <span className="label-text">Document</span>
+                  >
+                    Create
                   </label>
-                  <input
-                    onChange={(event) => {
-                      setDocument(event.target.files[0]);
-                    }}
-                    type="file"
-                    accept="application/pdf"
-                  />
                 </div>
-                <div className="form-control">
-                  <button
-                    onClick={uploadFile}
-                    className={
-                      "btn btn-block btn-success mt-6 " +
-                      (document ? " " : "btn-disabled")
-                    }
+              </div>
+              <div className="stat place-items-center">
+                <div className="stat-title">Total Documents</div>
+                <div className="stat-value">{docLists?.length}</div>
+                <div className="stat-actions">
+                  <label
+                    htmlFor="my-modal-topic"
+                    className="btn btn-sm btn-success modal-button"
+                    onClick={() => {
+                      setTopicSelect("document");
+                    }}
                   >
                     Upload
-                  </button>
+                  </label>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        {!_.isEmpty(success) && (
-          <div className="toast sm:mr-4">
-            <div className="alert alert-success shadow-lg">
-              <div>
-                <span>{success}</span>
-                <AiOutlineClose
-                  onClick={() => setSuccess("")}
-                  size={20}
-                  className="text-white cursor-pointer"
-                />
+        {!_.isEmpty(topicSelect) && (
+          <div>
+            <input
+              type="checkbox"
+              id="my-modal-topic"
+              className="modal-toggle"
+            />
+            <div className="modal w-full">
+              <div className="modal-box w-[90%] sm:w-[80%]">
+                <label
+                  htmlFor="my-modal-topic"
+                  className="btn btn-sm btn-circle absolute right-2 top-2"
+                  onClick={() => setTopicSelect("")}
+                >
+                  <AiOutlineClose size={20} />
+                </label>
+                {topicSelect === "document" ? <UploadDocument /> : []}
               </div>
             </div>
           </div>
