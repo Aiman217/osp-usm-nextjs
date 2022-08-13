@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Head from "next/head";
-import { getDocs, collection } from "firebase/firestore";
+import { getDoc, doc } from "firebase/firestore";
 import { db } from "/firebase-config";
 import { AiOutlineCloudDownload } from "react-icons/ai";
 import Moment from "moment";
@@ -10,15 +10,9 @@ const Documents = () => {
 
   useEffect(() => {
     // Fetch documents
-    const docCollectionRef = collection(db, "documents");
     const getDocuments = async () => {
-      const dataDoc = await getDocs(docCollectionRef);
-      setDocLists(
-        dataDoc.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }))
-      );
+      const dataDoc = await getDoc(doc(db, "contents", "documents"));
+      setDocLists(Object.values(dataDoc.data()))
     };
     getDocuments();
     // Finish fetching documents

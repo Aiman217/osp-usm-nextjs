@@ -2,12 +2,7 @@ import { useEffect, useState } from "react";
 import _ from "lodash";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import {
-  collection,
-  getDoc,
-  doc,
-  getDocs,
-} from "firebase/firestore";
+import { collection, getDoc, doc, getDocs } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "/firebase-config";
 import { AiOutlineClose } from "react-icons/ai";
@@ -37,32 +32,22 @@ const CMS = ({ user }) => {
   }, [user]);
 
   useEffect(() => {
-    // Fetch announcements
-    const annCollectionRef = collection(db, "announcements");
-    const getAnn = async () => {
-      const dataAnn = await getDocs(annCollectionRef);
-      setAnnLists(
-        dataAnn.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }))
-      );
+    // Fetch contents list
+    const contentCollectionRef = collection(db, "contents");
+    const getContents = async () => {
+      const dataContents = await getDocs(contentCollectionRef);
+      dataContents.docs.map((obj) => {
+        if (obj.id === "announcements") {
+          delete obj.id;
+          setAnnLists(Object.values(obj.data()));
+        } else if (obj.id === "documents") {
+          delete obj.id;
+          setDocLists(Object.values(obj.data()));
+        }
+      });
     };
-    getAnn();
-    // Finish fetching announcements
-    // Fetch documents
-    const docCollectionRef = collection(db, "documents");
-    const getDocuments = async () => {
-      const dataDoc = await getDocs(docCollectionRef);
-      setDocLists(
-        dataDoc.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }))
-      );
-    };
-    getDocuments();
-    // Finish fetching documents
+    getContents();
+    // Finish contents list
   }, []);
 
   return (
