@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getDocs, collection } from "firebase/firestore";
+import { getDoc, doc } from "firebase/firestore";
 import _ from "lodash";
 import Head from "next/head";
 import { db } from "/firebase-config";
@@ -12,15 +12,9 @@ const Documents = () => {
 
   useEffect(() => {
     // Fetch announcements
-    const annCollectionRef = collection(db, "announcements");
     const getAnn = async () => {
-      const dataAnn = await getDocs(annCollectionRef);
-      setAnnLists(
-        dataAnn.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }))
-      );
+      const dataAnn = await getDoc(doc(db, "contents", "announcements"));
+      setAnnLists(Object.values(dataAnn.data()))
     };
     getAnn();
     // Finish fetching announcements
