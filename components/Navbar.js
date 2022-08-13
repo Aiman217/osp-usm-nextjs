@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { HiMenu } from "react-icons/hi";
 import Link from "next/link";
 import _ from "lodash";
+import { getDoc, doc } from "firebase/firestore";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { auth } from "../firebase-config";
+import { auth, db } from "../firebase-config";
 import ThemeSelector from "./ThemeSelector";
 
 const Nav = ({ children }) => {
   const [user, setUser] = useState({});
+  const [showCMS, setShowCMS] = useState(false);
 
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
@@ -16,6 +18,22 @@ const Nav = ({ children }) => {
   const logout = () => {
     return signOut(auth);
   };
+
+  useEffect(() => {
+    const getAdmins = async (uid) => {
+      const dataAdmins = await getDoc(doc(db, "admins", uid));
+      if (dataAdmins.exists()) {
+        setShowCMS(true);
+      }
+    };
+    onAuthStateChanged(auth, (currentUser) => {
+      if (!_.isEmpty(currentUser)) {
+        getAdmins(currentUser?.uid);
+      } else {
+        setShowCMS(false);
+      }
+    });
+  }, [user]);
 
   return (
     <>
@@ -51,11 +69,15 @@ const Nav = ({ children }) => {
                     <a>Discover</a>
                   </Link>
                 </li>
-                <li className="uppercase font-bold">
-                  <Link href="/cms">
-                    <a>CMS</a>
-                  </Link>
-                </li>
+                {showCMS ? (
+                  <li className="uppercase font-bold">
+                    <Link href="/cms">
+                      <a>CMS</a>
+                    </Link>
+                  </li>
+                ) : (
+                  []
+                )}
               </ul>
             </div>
             <div className="flex-none">
@@ -77,7 +99,9 @@ const Nav = ({ children }) => {
             </div>
           </div>
           {/* Content of each page appear here */}
-          <div className="grow overflow-auto">{React.cloneElement(children, {user: user})}</div>
+          <div className="grow overflow-auto">
+            {React.cloneElement(children, { user: user })}
+          </div>
           {/* Content of each page end here */}
         </div>
         <div className="drawer-side">
@@ -104,11 +128,15 @@ const Nav = ({ children }) => {
                   <a>Discover</a>
                 </Link>
               </li>
-              <li className="uppercase font-bold text-sm">
-                <Link href="/cms">
-                  <a>CMS</a>
-                </Link>
-              </li>
+              {showCMS ? (
+                <li className="uppercase font-bold">
+                  <Link href="/cms">
+                    <a>CMS</a>
+                  </Link>
+                </li>
+              ) : (
+                []
+              )}
             </ul>
           </div>
         </div>
