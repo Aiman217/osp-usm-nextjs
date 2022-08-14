@@ -30,7 +30,7 @@ const About = () => {
         <div className="w-[90%] sm:w-[80%]">
           <div className="w-full flex flex-col justify-center gap-4">
             <div className="card card-compact w-full bg-base-100 shadow-xl">
-              <figure className=" w-full h-80">
+              <figure className=" w-full h-[50vh]">
                 <GoogleMapReact
                   bootstrapURLKeys={{
                     key: process.env.NEXT_PUBLIC_GOOGLE_MAP_API,
@@ -49,7 +49,7 @@ const About = () => {
                 <h2 className="card-title uppercase">We are here!</h2>
               </div>
             </div>
-            <div className="carousel w-full h-40 rounded-2xl">
+            <div className="carousel w-full h-[50vh] rounded-2xl">
               <div id="slide1" className="carousel-item relative w-full">
                 <img src="https://placeimg.com/800/200/arch" className="w-full" />
                 <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
