@@ -7,6 +7,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "/firebase-config";
 import { AiOutlineClose } from "react-icons/ai";
 import UploadDocument from "./UploadDocument";
+import CreateAnnouncement from "./CreateAnnouncement";
 
 const CMS = ({ user }) => {
   const [annLists, setAnnLists] = useState([]);
@@ -109,7 +110,11 @@ const CMS = ({ user }) => {
                 >
                   <AiOutlineClose size={20} />
                 </label>
-                {topicSelect === "document" ? <UploadDocument /> : []}
+                {topicSelect === "document" ? (
+                  <UploadDocument />
+                ) : (
+                  <CreateAnnouncement />
+                )}
               </div>
             </div>
           </div>
