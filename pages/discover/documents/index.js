@@ -4,15 +4,18 @@ import { getDoc, doc } from "firebase/firestore";
 import { db } from "/firebase-config";
 import { AiOutlineCloudDownload } from "react-icons/ai";
 import Moment from "moment";
+import Loading from '/components/Loading'
 
 const Documents = () => {
   const [docLists, setDocLists] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Fetch documents
     const getDocuments = async () => {
       const dataDoc = await getDoc(doc(db, "contents", "documents"));
       setDocLists(Object.values(dataDoc.data()))
+      setLoading(false);
     };
     getDocuments();
     // Finish fetching documents
@@ -66,6 +69,7 @@ const Documents = () => {
           </div>
         </div>
       </div>
+      {loading && <Loading />}
     </>
   );
 };

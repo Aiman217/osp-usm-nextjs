@@ -8,11 +8,13 @@ import { auth, db } from "/firebase-config";
 import { AiOutlineClose } from "react-icons/ai";
 import UploadDocument from "./UploadDocument";
 import CreateAnnouncement from "./CreateAnnouncement";
+import Loading from '/components/Loading'
 
 const CMS = ({ user }) => {
   const [annLists, setAnnLists] = useState([]);
   const [docLists, setDocLists] = useState([]);
   const [topicSelect, setTopicSelect] = useState("");
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
@@ -46,6 +48,7 @@ const CMS = ({ user }) => {
           setDocLists(Object.values(obj.data()));
         }
       });
+      setLoading(false);
     };
     getContents();
     // Finish contents list
@@ -120,6 +123,7 @@ const CMS = ({ user }) => {
           </div>
         )}
       </div>
+      {loading && <Loading />}
     </>
   );
 };

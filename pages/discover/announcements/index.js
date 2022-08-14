@@ -5,16 +5,19 @@ import Head from "next/head";
 import { db } from "/firebase-config";
 import { AiOutlineRead, AiOutlineClose } from "react-icons/ai";
 import Moment from "moment";
+import Loading from '/components/Loading'
 
 const Documents = () => {
   const [annLists, setAnnLists] = useState([]);
   const [annSelect, setAnnSelect] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Fetch announcements
     const getAnn = async () => {
       const dataAnn = await getDoc(doc(db, "contents", "announcements"));
       setAnnLists(Object.values(dataAnn.data()))
+      setLoading(false);
     };
     getAnn();
     // Finish fetching announcements
@@ -94,6 +97,7 @@ const Documents = () => {
           </div>
         )}
       </div>
+      {loading && <Loading />}
     </>
   );
 };
