@@ -84,7 +84,7 @@ const About = () => {
                 Putra Al-Haj on 7 August 1967. USM was established as a
                 statutory body in 1969 as the second university in Malaysia. It
                 was first known as Universiti Pulau Pinang. The university
-                operated on borrowed premises at the Malayan Teachers' Training
+                operated on borrowed premises at the Malayan Teachers&apos; Training
                 College at Gelugor. In 1971, it moved to its present 239-hectare
                 site at Minden (formerly Minden Barracks of the British Far East
                 Command) in Gelugor, 10 kilometres from the city of Georgetown.
