@@ -205,7 +205,7 @@ const About = () => {
             <p>If you wish to contribute, please follow the steps below.</p>
             <br />
             <div
-              tabindex="0"
+              tabIndex="0"
               className="collapse collapse-plus border border-base-300 bg-base-100 rounded-box w-[90%]"
             >
               <div className="collapse-title text-lg font-medium">Step 1</div>
@@ -215,7 +215,7 @@ const About = () => {
             </div>
             <br />
             <div
-              tabindex="0"
+              tabIndex="0"
               className="collapse collapse-plus border border-base-300 bg-base-100 rounded-box w-[90%]"
             >
               <div className="collapse-title text-lg font-medium">Step 2</div>
@@ -228,7 +228,7 @@ const About = () => {
             </div>
             <br />
             <div
-              tabindex="0"
+              tabIndex="0"
               className="collapse collapse-plus border border-base-300 bg-base-100 rounded-box w-[90%]"
             >
               <div className="collapse-title text-lg font-medium">Step 3</div>
