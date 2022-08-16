@@ -28,25 +28,25 @@ const About = () => {
   const toolList = [
     {
       name: "NextJS",
-      color: "shadow-white",
+      color: "shadow-primary",
       icon: <TbBrandNextjs size={60} />,
       url: "https://nextjs.org/",
     },
     {
       name: "TailwindCSS",
-      color: "shadow-blue-500",
+      color: "shadow-secondary",
       icon: <TbBrandTailwind size={60} />,
       url: "https://tailwindcss.com/",
     },
     {
       name: "Vercel",
-      color: "shadow-white",
+      color: "shadow-primary",
       icon: <TbBrandVercel size={60} />,
       url: "https://vercel.com/",
     },
     {
       name: "Firebase",
-      color: "shadow-yellow-500",
+      color: "shadow-secondary",
       icon: <TbBrandFirebase size={60} />,
       url: "https://firebase.google.com/",
     },
@@ -69,12 +69,22 @@ const About = () => {
       <div className="py-4 sm:py-8 flex flex-col justify-center items-center gap-4">
         <div className="w-[90%] sm:w-[80%]">
           <div className="w-full flex flex-col justify-center items-center">
-            <div>
+            <div className="w-full">
               <h1 className="text-xl sm:text-2xl font-bold uppercase text-center tracking-widest">
                 About Us
               </h1>
               <div className="divider uppercase font-bold">History</div>
-              <p>
+              <div className="w-full h-[30vh] relative bg-white rounded-lg">
+                <Image
+                  src="/usm_full_logo.png"
+                  layout="fill"
+                  objectFit="contain"
+                  objectPosition="center"
+                  alt="USM Logo"
+                />
+              </div>
+              <br />
+              <p className="text-justify">
                 The idea of a university in Penang was first mooted by D. S.
                 Ramanathan in 1959 in the State Assembly and later crystallised
                 when he was nominated chairman of the Penang University Project
@@ -84,28 +94,28 @@ const About = () => {
                 Putra Al-Haj on 7 August 1967. USM was established as a
                 statutory body in 1969 as the second university in Malaysia. It
                 was first known as Universiti Pulau Pinang. The university
-                operated on borrowed premises at the Malayan Teachers&apos; Training
-                College at Gelugor. In 1971, it moved to its present 239-hectare
-                site at Minden (formerly Minden Barracks of the British Far East
-                Command) in Gelugor, 10 kilometres from the city of Georgetown.
-                There are two other USM campuses: one at Kubang Kerian in
-                Kelantan, known as the Health campus, and the other at Seri
-                Ampangan, Nibong Tebal in Penang, known as the Engineering
-                campus. The former houses the School of Medical Sciences, the
-                School of Health Sciences and the School of Dental Sciences,
-                while the latter houses the six engineering schools. Universiti
-                Sains Malaysia teaches in the fields of Pure Sciences, Applied
-                Sciences, Pharmaceutical Sciences, Building Science and
-                Technology, Social Sciences, Humanities and Education as well as
-                conducts research. USM offers courses at undergraduate and
-                postgraduate levels to more than 28,000 students. USM has won
-                the Asian Innovation Award in which USM emerged as the only
-                winner from this country.
+                operated on borrowed premises at the Malayan Teachers&apos;
+                Training College at Gelugor. In 1971, it moved to its present
+                239-hectare site at Minden (formerly Minden Barracks of the
+                British Far East Command) in Gelugor, 10 kilometres from the
+                city of Georgetown. There are two other USM campuses: one at
+                Kubang Kerian in Kelantan, known as the Health campus, and the
+                other at Seri Ampangan, Nibong Tebal in Penang, known as the
+                Engineering campus. The former houses the School of Medical
+                Sciences, the School of Health Sciences and the School of Dental
+                Sciences, while the latter houses the six engineering schools.
+                Universiti Sains Malaysia teaches in the fields of Pure
+                Sciences, Applied Sciences, Pharmaceutical Sciences, Building
+                Science and Technology, Social Sciences, Humanities and
+                Education as well as conducts research. USM offers courses at
+                undergraduate and postgraduate levels to more than 28,000
+                students. USM has won the Asian Innovation Award in which USM
+                emerged as the only winner from this country.
               </p>
             </div>
             <div className="divider uppercase font-bold">Photos</div>
             {/* Start of Carousel */}
-            <div className="carousel w-full sm:w-[60%] h-[40vh] rounded-2xl">
+            <div className="carousel w-full sm:w-[90%] h-[40vh] sm:h-[60vh] rounded-2xl">
               {slideList.map((item, index) => (
                 <div
                   key={index}
@@ -180,7 +190,57 @@ const About = () => {
               ))}
             </div>
             {/* End of Tool Use */}
-            <div className="divider"></div>
+            <div className="divider uppercase font-bold">Source Code</div>
+            {/* Start of Source Code */}
+            <p>
+              If you wish to see the source code for this website,
+              <a
+                href="https://github.com/Aiman217/osp-usm-nextjs"
+                className="link link-primary ml-1"
+              >
+                click here.
+              </a>
+            </p>
+            <br />
+            <p>If you wish to contribute, please follow the steps below.</p>
+            <br />
+            <div
+              tabindex="0"
+              className="collapse collapse-plus border border-base-300 bg-base-100 rounded-box w-[90%]"
+            >
+              <div className="collapse-title text-lg font-medium">Step 1</div>
+              <div className="collapse-content">
+                <p>Go to github link provided above and fork the repository.</p>
+              </div>
+            </div>
+            <br />
+            <div
+              tabindex="0"
+              className="collapse collapse-plus border border-base-300 bg-base-100 rounded-box w-[90%]"
+            >
+              <div className="collapse-title text-lg font-medium">Step 2</div>
+              <div className="collapse-content">
+                <p>
+                  Do any changes that you consider fit for the improvement of
+                  this website.
+                </p>
+              </div>
+            </div>
+            <br />
+            <div
+              tabindex="0"
+              className="collapse collapse-plus border border-base-300 bg-base-100 rounded-box w-[90%]"
+            >
+              <div className="collapse-title text-lg font-medium">Step 3</div>
+              <div className="collapse-content">
+                <p>
+                  Make pull request and answer any questions if ask by the
+                  repository owner.
+                </p>
+              </div>
+            </div>
+            {/* End of Source Code */}
+            <div className="divider uppercase font-bold"></div>
           </div>
         </div>
       </div>
