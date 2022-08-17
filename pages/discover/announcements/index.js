@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { getDoc, doc } from "firebase/firestore";
 import _ from "lodash";
 import Head from "next/head";
+import Link from "next/link";
 import { db } from "/firebase-config";
 import { AiOutlineRead, AiOutlineClose } from "react-icons/ai";
 import Moment from "moment";
-import Loading from '/components/Loading'
+import Loading from "/components/Loading";
 
 const Documents = () => {
   const [annLists, setAnnLists] = useState([]);
@@ -16,7 +17,7 @@ const Documents = () => {
     // Fetch announcements
     const getAnn = async () => {
       const dataAnn = await getDoc(doc(db, "contents", "announcements"));
-      setAnnLists(Object.values(dataAnn.data()))
+      setAnnLists(Object.values(dataAnn.data()));
       setLoading(false);
     };
     getAnn();
@@ -31,6 +32,14 @@ const Documents = () => {
       </Head>
       <div className="py-4 flex flex-col justify-center items-center gap-4">
         <div className="w-[90%] sm:w-[80%]">
+          <div className="text-sm breadcrumbs">
+            <ul>
+              <li>
+                <Link href="/discover">Discover</Link>
+              </li>
+              <li>Announcements</li>
+            </ul>
+          </div>
           <h2 className="bg-base-100 rounded-full px-3 py-1 text-lg text-center mb-4 font-bold">
             Announcements
           </h2>

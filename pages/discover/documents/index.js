@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import Head from "next/head";
+import Link from 'next/link'
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "/firebase-config";
 import { AiOutlineCloudDownload } from "react-icons/ai";
 import Moment from "moment";
-import Loading from '/components/Loading'
+import Loading from "/components/Loading";
 
 const Documents = () => {
   const [docLists, setDocLists] = useState([]);
@@ -14,7 +15,7 @@ const Documents = () => {
     // Fetch documents
     const getDocuments = async () => {
       const dataDoc = await getDoc(doc(db, "contents", "documents"));
-      setDocLists(Object.values(dataDoc.data()))
+      setDocLists(Object.values(dataDoc.data()));
       setLoading(false);
     };
     getDocuments();
@@ -29,6 +30,14 @@ const Documents = () => {
       </Head>
       <div className="py-4 flex flex-col justify-center items-center gap-4">
         <div className="w-[90%] sm:w-[80%]">
+          <div className="text-sm breadcrumbs">
+            <ul>
+              <li>
+                <Link href="/discover">Discover</Link>
+              </li>
+              <li>Documents</li>
+            </ul>
+          </div>
           <h2 className="bg-base-100 rounded-full px-3 py-1 text-lg text-center mb-4 font-bold">
             Important Documents
           </h2>

@@ -74,7 +74,7 @@ const About = () => {
                 About Us
               </h1>
               <div className="divider uppercase font-bold">History</div>
-              <div className="w-full h-[30vh] relative bg-white rounded-lg">
+              <div className="w-full h-[30vh] relative bg-gray-100 rounded-lg">
                 <Image
                   src="/usm_full_logo.png"
                   layout="fill"

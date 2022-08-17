@@ -16,9 +16,8 @@ export default function Home() {
                 OneStopPortal@USM
               </h1>
               <p className="text-lg sm:text-2xl py-6">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Voluptatem asperiores accusantium odit veniam delectus aliquid
-                perferendis eaque, magni aliquam sequi!
+                A website specially made for USM. Providing a lot of useful
+                tools to help you manage your life as a usmian.
               </p>
               <button className="btn btn-sm sm:btn-lg btn-primary">
                 <Link href="/register">Register Now</Link>
