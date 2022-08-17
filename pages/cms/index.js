@@ -8,11 +8,13 @@ import { auth, db } from "/firebase-config";
 import { AiOutlineClose } from "react-icons/ai";
 import UploadDocument from "./UploadDocument";
 import CreateAnnouncement from "./CreateAnnouncement";
-import Loading from '/components/Loading'
+import CreateLink from "./CreateLink";
+import Loading from "/components/Loading";
 
 const CMS = ({ user }) => {
   const [annLists, setAnnLists] = useState([]);
   const [docLists, setDocLists] = useState([]);
+  const [linkLists, setLinkLists] = useState([]);
   const [topicSelect, setTopicSelect] = useState("");
   const [loading, setLoading] = useState(true);
   const router = useRouter();
@@ -46,7 +48,10 @@ const CMS = ({ user }) => {
         } else if (obj.id === "documents") {
           delete obj.id;
           setDocLists(Object.values(obj.data()));
-        }
+        } else if (obj.id === "links") {
+          delete obj.id;
+          setLinkLists(Object.values(obj.data()));
+        } 
       });
       setLoading(false);
     };
@@ -94,6 +99,21 @@ const CMS = ({ user }) => {
                   </label>
                 </div>
               </div>
+              <div className="stat place-items-center">
+                <div className="stat-title">Total Links</div>
+                <div className="stat-value">{linkLists?.length}</div>
+                <div className="stat-actions">
+                  <label
+                    htmlFor="my-modal-topic"
+                    className="btn btn-sm btn-success modal-button"
+                    onClick={() => {
+                      setTopicSelect("links");
+                    }}
+                  >
+                    Create
+                  </label>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -115,8 +135,10 @@ const CMS = ({ user }) => {
                 </label>
                 {topicSelect === "document" ? (
                   <UploadDocument />
-                ) : (
+                ) : topicSelect === "annnouncement" ? (
                   <CreateAnnouncement />
+                ) : (
+                  <CreateLink />
                 )}
               </div>
             </div>
