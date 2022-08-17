@@ -16,6 +16,12 @@ const Discover = () => {
       src_img: "/ann_bg.png",
       href: "/discover/announcements",
     },
+    {
+      title: "Links",
+      desc: "Find all important links related with USM.",
+      src_img: "/links_bg.png",
+      href: "/discover/links",
+    },
   ];
   return (
     <>

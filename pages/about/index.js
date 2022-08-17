@@ -76,7 +76,7 @@ const About = () => {
               <div className="divider uppercase font-bold">History</div>
               <div className="w-full h-[30vh] relative bg-gray-100 rounded-lg">
                 <Image
-                  src="/usm_full_logo.png"
+                  src="/usm_logo.png"
                   layout="fill"
                   objectFit="contain"
                   objectPosition="center"
