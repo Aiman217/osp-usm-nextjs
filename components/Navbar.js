@@ -69,6 +69,11 @@ const Nav = ({ children }) => {
                     <a>Discover</a>
                   </Link>
                 </li>
+                <li className="uppercase font-bold">
+                  <Link href="/discussion">
+                    <a>Discussion</a>
+                  </Link>
+                </li>
                 {showCMS ? (
                   <li className="uppercase font-bold">
                     <Link href="/cms">
@@ -126,6 +131,11 @@ const Nav = ({ children }) => {
               <li className="uppercase font-bold text-sm">
                 <Link href="/discover">
                   <a>Discover</a>
+                </Link>
+              </li>
+              <li className="uppercase font-bold">
+                <Link href="/discussion">
+                  <a>Discussion</a>
                 </Link>
               </li>
               {showCMS ? (
