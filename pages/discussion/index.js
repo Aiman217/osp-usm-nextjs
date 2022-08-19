@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "/firebase-config";
@@ -7,8 +8,8 @@ import Loading from "/components/Loading";
 
 const Discussion = () => {
   const [discussList, setDiscussList] = useState([]);
-  const [discussSelect, setDiscussSelect] = useState([]);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     // Fetch announcements
@@ -37,10 +38,9 @@ const Discussion = () => {
           <h2 className="bg-base-100 rounded-full px-3 py-1 text-lg text-center mb-4 font-bold">
             Discussion
           </h2>
-          {console.log(discussList, discussSelect)}
           <div className="card w-full overflow-x-auto border-2 py-4">
             <table className="table table-zebra table-compact">
-            <thead>
+              <thead>
                 <tr>
                   <th></th>
                   <th>Title</th>
@@ -51,9 +51,15 @@ const Discussion = () => {
               </thead>
               <tbody>
                 {discussList.map((item, index) => (
-                  <tr key={index} onClick={() => {
-                    setDiscussSelect(item)
-                  }}>
+                  <tr
+                    key={index}
+                    onClick={() => {
+                      router.push({
+                        pathname: `/discussion/${item.id}`,
+                        query: { data: JSON.stringify(item) },
+                      });
+                    }}
+                  >
                     <th>{++index}</th>
                     <td>{item.title}</td>
                     <td>{item.desc.substring(0, 24) + "..."}</td>
