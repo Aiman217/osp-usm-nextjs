@@ -1,30 +1,31 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "/firebase-config";
 import Moment from "moment";
+import Loading from "/components/Loading";
 
-export async function getServerSideProps(context) {
-  const { res } = context;
-  res.setHeader("Cache-Control", `s-maxage=60, stale-while-revalidate`);
+const Discussion = () => {
+  const [discussList, setDiscussList] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
-  const dataDiscuss = await getDocs(collection(db, "discussion"));
-
-  return {
-    props: {
-      discussList: JSON.stringify(
+  useEffect(() => {
+    // Fetch announcements
+    const getDiscuss = async () => {
+      const dataDiscuss = await getDocs(collection(db, "discussion"));
+      setDiscussList(
         dataDiscuss.docs.map((doc) => ({
           ...doc.data(),
           id: doc.id,
         }))
-      ),
-    }, // will be passed to the page component as props
-  };
-}
-
-const Discussion = ({ discussList }) => {
-  discussList = JSON.parse(discussList);
-  const router = useRouter();
+      );
+      setLoading(false);
+    };
+    getDiscuss();
+    // Finish fetching announcements
+  }, []);
 
   return (
     <>
@@ -86,7 +87,6 @@ const Discussion = ({ discussList }) => {
                         query: { data: JSON.stringify(item) },
                       });
                     }}
-                    className="cursor-pointer"
                   >
                     <th>{++index}</th>
                     <td>{item.title}</td>
@@ -103,6 +103,7 @@ const Discussion = ({ discussList }) => {
             </table> */}
         </div>
       </div>
+      {loading && <Loading />}
     </>
   );
 };
