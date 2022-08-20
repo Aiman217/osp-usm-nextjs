@@ -37,8 +37,36 @@ const Discussion = ({ discussList }) => {
           <h2 className="bg-base-100 rounded-full px-3 py-1 text-lg text-center mb-4 font-bold">
             Discussion
           </h2>
-          <div className="card w-full overflow-x-auto border-2 py-4">
-            <table className="table table-zebra table-compact">
+          {discussList.map((item, index) => (
+            <div
+              key={index}
+              onClick={() => {
+                router.push({
+                  pathname: `/discussion/${item.id}`,
+                  query: { data: JSON.stringify(item) },
+                });
+              }}
+              className="indicator w-full cursor-pointer hover:scale-105 duration-300"
+            >
+              <span className="indicator-item badge badge-primary font-bold">
+                {item.upvote}
+              </span>
+              <div className="card card-compact bg-base-100 shadow-xl">
+                <div className="card-body">
+                  <h2 className="card-title">
+                    {item.title}
+                    <a className="text-sm italic font-light">
+                      {Moment.unix(item.created_at.seconds).format(
+                        "MMMM Do YYYY, h:mm:ss a"
+                      )}
+                    </a>
+                  </h2>
+                  <p>{item.desc.substring(0, 240) + "..."}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+          {/* <table className="table table-zebra table-compact">
               <thead>
                 <tr>
                   <th></th>
@@ -72,8 +100,7 @@ const Discussion = ({ discussList }) => {
                   </tr>
                 ))}
               </tbody>
-            </table>
-          </div>
+            </table> */}
         </div>
       </div>
     </>
