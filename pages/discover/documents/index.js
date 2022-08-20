@@ -5,7 +5,10 @@ import { db } from "/firebase-config";
 import { AiOutlineCloudDownload } from "react-icons/ai";
 import Moment from "moment";
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  const { res } = context;
+  res.setHeader("Cache-Control", `s-maxage=60, stale-while-revalidate`);
+
   const dataDoc = await getDoc(doc(db, "contents", "documents"));
 
   return {
