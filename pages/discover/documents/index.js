@@ -1,26 +1,22 @@
-import { useEffect, useState } from "react";
 import Head from "next/head";
-import Link from 'next/link'
+import Link from "next/link";
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "/firebase-config";
 import { AiOutlineCloudDownload } from "react-icons/ai";
 import Moment from "moment";
-import Loading from "/components/Loading";
 
-const Documents = () => {
-  const [docLists, setDocLists] = useState([]);
-  const [loading, setLoading] = useState(true);
+export async function getServerSideProps() {
+  const dataDoc = await getDoc(doc(db, "contents", "documents"));
 
-  useEffect(() => {
-    // Fetch documents
-    const getDocuments = async () => {
-      const dataDoc = await getDoc(doc(db, "contents", "documents"));
-      setDocLists(Object.values(dataDoc.data()));
-      setLoading(false);
-    };
-    getDocuments();
-    // Finish fetching documents
-  }, []);
+  return {
+    props: {
+      docLists: JSON.stringify(Object.values(dataDoc.data())),
+    }, // will be passed to the page component as props
+  };
+}
+
+const Documents = ({ docLists }) => {
+  docLists = JSON.parse(docLists);
 
   return (
     <>
@@ -78,7 +74,6 @@ const Documents = () => {
           </div>
         </div>
       </div>
-      {loading && <Loading />}
     </>
   );
 };
