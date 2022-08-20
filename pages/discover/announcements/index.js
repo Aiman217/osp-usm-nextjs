@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getDoc, doc } from "firebase/firestore";
 import _ from "lodash";
 import Head from "next/head";
@@ -6,23 +6,23 @@ import Link from "next/link";
 import { db } from "/firebase-config";
 import { AiOutlineRead, AiOutlineClose } from "react-icons/ai";
 import Moment from "moment";
+import Loading from "/components/Loading";
 
-export async function getServerSideProps(context) {
-  const { res } = context;
-  res.setHeader("Cache-Control", `s-maxage=60, stale-while-revalidate`);
-
-  const dataAnn = await getDoc(doc(db, "contents", "announcements"));
-
-  return {
-    props: {
-      annLists: JSON.stringify(Object.values(dataAnn.data())),
-    }, // will be passed to the page component as props
-  };
-}
-
-const Documents = ({ annLists }) => {
+const Documents = () => {
+  const [annLists, setAnnLists] = useState([]);
   const [annSelect, setAnnSelect] = useState([]);
-  annLists = JSON.parse(annLists);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Fetch announcements
+    const getAnn = async () => {
+      const dataAnn = await getDoc(doc(db, "contents", "announcements"));
+      setAnnLists(Object.values(dataAnn.data()));
+      setLoading(false);
+    };
+    getAnn();
+    // Finish fetching announcements
+  }, []);
 
   return (
     <>
@@ -106,6 +106,7 @@ const Documents = ({ annLists }) => {
           </div>
         )}
       </div>
+      {loading && <Loading />}
     </>
   );
 };
