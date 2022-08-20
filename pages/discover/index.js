@@ -41,7 +41,6 @@ const Discover = () => {
                 layout="fill"
                 objectFit="cover"
                 alt="Doc Background"
-                quality={50}
                 priority
               />
             </figure>
