@@ -56,10 +56,12 @@ const Discussion = () => {
                 <div className="card-body">
                   <h2 className="card-title">
                     {item.title}
-                    <a className="text-sm italic font-light">
+                    <a className="text-sm font-light">
+                      (
                       {Moment.unix(item.created_at.seconds).format(
                         "MMMM Do YYYY, h:mm:ss a"
                       )}
+                      )
                     </a>
                   </h2>
                   <p>{item.desc.substring(0, 240) + "..."}</p>
@@ -67,40 +69,6 @@ const Discussion = () => {
               </div>
             </div>
           ))}
-          {/* <table className="table table-zebra table-compact">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Title</th>
-                  <th>Desc</th>
-                  <th>Created At</th>
-                  <th>Upvote</th>
-                </tr>
-              </thead>
-              <tbody>
-                {discussList.map((item, index) => (
-                  <tr
-                    key={index}
-                    onClick={() => {
-                      router.push({
-                        pathname: `/discussion/${item.id}`,
-                        query: { data: JSON.stringify(item) },
-                      });
-                    }}
-                  >
-                    <th>{++index}</th>
-                    <td>{item.title}</td>
-                    <td>{item.desc.substring(0, 24) + "..."}</td>
-                    <td>
-                      {Moment.unix(item.created_at.seconds).format(
-                        "MMMM Do YYYY, h:mm:ss a"
-                      )}
-                    </td>
-                    <td>{item.upvote}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table> */}
         </div>
       </div>
       {loading && <Loading />}

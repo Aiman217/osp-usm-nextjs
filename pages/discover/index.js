@@ -49,9 +49,9 @@ const Discover = () => {
               <h2 className="card-title">{item.title}</h2>
               <p>{item.desc}</p>
               <div className="card-actions justify-end">
-                <button className="btn btn-primary">
-                  <Link href={item.href}>Go to Page</Link>
-                </button>
+                <Link href={item.href}>
+                  <button className="btn btn-primary">Go to Page</button>
+                </Link>
               </div>
             </div>
           </div>

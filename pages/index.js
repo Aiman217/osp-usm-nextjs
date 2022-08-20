@@ -19,9 +19,11 @@ export default function Home() {
                 A website specially made for USM. Providing a lot of useful
                 tools to help you manage your life as a usmian.
               </p>
-              <button className="btn btn-sm sm:btn-lg btn-primary">
-                <Link href="/register">Register Now</Link>
-              </button>
+              <Link href="/register">
+                <button className="btn btn-sm sm:btn-lg btn-primary">
+                  Register Now
+                </button>
+              </Link>
             </div>
           </div>
         </div>
