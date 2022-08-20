@@ -49,8 +49,7 @@ const Discussion = () => {
               }}
               className="indicator w-full cursor-pointer hover:scale-105 duration-300"
             >
-              <span className="indicator-item badge badge-primary font-bold">
-                {item.upvote}
+              <span className={"indicator-item badge font-bold " + item.label.color}>
               </span>
               <div className="card card-compact bg-base-100 shadow-xl">
                 <div className="card-body">
