@@ -1,25 +1,24 @@
-import { useEffect, useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "/firebase-config";
 import { AiOutlineLink } from "react-icons/ai";
-import Loading from "/components/Loading";
 
-const Links = () => {
-  const [linkLists, setLinkLists] = useState([]);
-  const [loading, setLoading] = useState(true);
+export async function getServerSideProps(context) {
+  const { res } = context;
+  res.setHeader("Cache-Control", `s-maxage=60, stale-while-revalidate`);
 
-  useEffect(() => {
-    // Fetch links
-    const getLinks = async () => {
-      const dataLink = await getDoc(doc(db, "contents", "links"));
-      setLinkLists(Object.values(dataLink.data()));
-      setLoading(false);
-    };
-    getLinks();
-    // Finish fetching links
-  }, []);
+  const dataLink = await getDoc(doc(db, "contents", "links"));
+
+  return {
+    props: {
+      linkLists: JSON.stringify(Object.values(dataLink.data())),
+    }, // will be passed to the page component as props
+  };
+}
+
+const Links = ({ linkLists }) => {
+  linkLists = JSON.parse(linkLists);
 
   return (
     <>
@@ -73,7 +72,6 @@ const Links = () => {
           </div>
         </div>
       </div>
-      {loading && <Loading />}
     </>
   );
 };
