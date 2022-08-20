@@ -7,18 +7,20 @@ import { AiOutlineCloudDownload } from "react-icons/ai";
 import Moment from "moment";
 import Loading from "/components/Loading";
 
-export async function getServerSideProps() {
-  const dataDoc = await getDoc(doc(db, "contents", "documents"));
+const Documents = () => {
+  const [docLists, setDocLists] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  return {
-    props: {
-      docLists: JSON.stringify(Object.values(dataDoc.data())),
-    }, // will be passed to the page component as props
-  };
-}
-
-const Documents = ({ docLists }) => {
-  docLists = JSON.parse(docLists);
+  useEffect(() => {
+    // Fetch documents
+    const getDocuments = async () => {
+      const dataDoc = await getDoc(doc(db, "contents", "documents"));
+      setDocLists(Object.values(dataDoc.data()));
+      setLoading(false);
+    };
+    getDocuments();
+    // Finish fetching documents
+  }, []);
 
   return (
     <>
