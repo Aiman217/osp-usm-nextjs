@@ -1,14 +1,13 @@
+import { useEffect, useState } from "react";
 import Head from "next/head";
-import Link from "next/link";
+import Link from 'next/link'
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "/firebase-config";
 import { AiOutlineCloudDownload } from "react-icons/ai";
 import Moment from "moment";
+import Loading from "/components/Loading";
 
-export async function getServerSideProps(context) {
-  const { res } = context;
-  res.setHeader("Cache-Control", `s-maxage=60, stale-while-revalidate`);
-
+export async function getServerSideProps() {
   const dataDoc = await getDoc(doc(db, "contents", "documents"));
 
   return {
@@ -77,6 +76,7 @@ const Documents = ({ docLists }) => {
           </div>
         </div>
       </div>
+      {loading && <Loading />}
     </>
   );
 };
