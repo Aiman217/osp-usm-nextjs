@@ -57,6 +57,8 @@ const Links = () => {
                     <td>{item.owner}</td>
                     <td>{item.desc.substring(0, 40) + "..."}</td>
                     <td>
+                      <div className="tooltip" data-tip="Go To Link">
+
                       <button
                         onClick={() => {
                           window.open(item.url);
@@ -65,6 +67,7 @@ const Links = () => {
                       >
                         <AiOutlineLink size={20} />
                       </button>
+                      </div>
                     </td>
                   </tr>
                 ))}

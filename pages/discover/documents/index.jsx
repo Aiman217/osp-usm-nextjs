@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Head from "next/head";
-import Link from 'next/link'
+import Link from "next/link";
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "/firebase-config";
 import { AiOutlineCloudDownload } from "react-icons/ai";
@@ -62,14 +62,16 @@ const Documents = () => {
                       )}
                     </td>
                     <td>
-                      <button
-                        onClick={() => {
-                          window.open(item.url);
-                        }}
-                        className="btn btn-circle"
-                      >
-                        <AiOutlineCloudDownload size={20} />
-                      </button>
+                      <div className="tooltip" data-tip="Download Document">
+                        <button
+                          onClick={() => {
+                            window.open(item.url);
+                          }}
+                          className="btn btn-circle"
+                        >
+                          <AiOutlineCloudDownload size={20} />
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}

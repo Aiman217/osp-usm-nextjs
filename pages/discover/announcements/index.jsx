@@ -66,15 +66,17 @@ const Documents = () => {
                       )}
                     </td>
                     <td>
-                      <label
-                        htmlFor="my-modal-3"
-                        className="btn btn-circle modal-button"
-                        onClick={() => {
-                          setAnnSelect(item);
-                        }}
-                      >
-                        <AiOutlineRead size={20} />
-                      </label>
+                      <div className="tooltip" data-tip="Read More">
+                        <label
+                          htmlFor="my-modal-3"
+                          className="btn btn-circle modal-button"
+                          onClick={() => {
+                            setAnnSelect(item);
+                          }}
+                        >
+                          <AiOutlineRead size={20} />
+                        </label>
+                      </div>
                     </td>
                   </tr>
                 ))}
