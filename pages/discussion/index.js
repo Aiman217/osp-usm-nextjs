@@ -42,15 +42,17 @@ const Discussion = ({ user }) => {
           <div className="bg-base-100 rounded-full flex flex-rows justify-between items-center px-6 py-2 text-lg text-center mb-4 font-bold">
             <h1>Discussion</h1>
             {user && (
-              <label
-                htmlFor="my-modal-create"
-                className="btn btn-sm btn-ghost modal-button cursor-pointer"
-                onClick={() => {
-                  setCreateDiscussion(true);
-                }}
-              >
-                <AiOutlinePlusSquare size={25} />
-              </label>
+              <div className="tooltip tooltip-left" data-tip="Open New Discussion">
+                <label
+                  htmlFor="my-modal-create"
+                  className="btn btn-sm btn-ghost modal-button cursor-pointer"
+                  onClick={() => {
+                    setCreateDiscussion(true);
+                  }}
+                >
+                  <AiOutlinePlusSquare size={25} />
+                </label>
+              </div>
             )}
           </div>
           <div className="flex flex-col gap-4 w-full">

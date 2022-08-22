@@ -52,7 +52,7 @@ const CreateDiscussion = () => {
     <>
       <div className="form-control">
         <h1 className="text-lg font-bold uppercase text-center mt-4">
-          Create Discussion
+          Open New Discussion
         </h1>
         <div className="divider p-0 m-0"></div>
         <label className="label">
@@ -107,7 +107,7 @@ const CreateDiscussion = () => {
             (title && desc ? " " : "btn-disabled")
           }
         >
-          Create
+          Open
         </button>
       </div>
       {!_.isEmpty(success) && (
