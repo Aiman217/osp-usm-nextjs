@@ -55,30 +55,40 @@ const Nav = ({ children }) => {
             <div className="flex-none hidden lg:block">
               <ul className="flex flex-row gap-4">
                 <li className="uppercase font-bold">
-                  <Link href="/">
-                    <a>Home</a>
-                  </Link>
+                  <div className="tooltip tooltip-bottom" data-tip="Home">
+                    <Link href="/">
+                      <a>Home</a>
+                    </Link>
+                  </div>
                 </li>
                 <li className="uppercase font-bold">
-                  <Link href="/about">
-                    <a>About</a>
-                  </Link>
+                  <div className="tooltip tooltip-bottom" data-tip="About">
+                    <Link href="/about">
+                      <a>About</a>
+                    </Link>
+                  </div>
                 </li>
                 <li className="uppercase font-bold">
-                  <Link href="/discover">
-                    <a>Discover</a>
-                  </Link>
+                  <div className="tooltip tooltip-bottom" data-tip="Discover">
+                    <Link href="/discover">
+                      <a>Discover</a>
+                    </Link>
+                  </div>
                 </li>
                 <li className="uppercase font-bold">
-                  <Link href="/discussion">
-                    <a>Discussion</a>
-                  </Link>
+                  <div className="tooltip tooltip-bottom" data-tip="Discussion">
+                    <Link href="/discussion">
+                      <a>Discussion</a>
+                    </Link>
+                  </div>
                 </li>
                 {showCMS ? (
                   <li className="uppercase font-bold">
-                    <Link href="/cms">
-                      <a>CMS</a>
-                    </Link>
+                    <div className="tooltip tooltip-bottom" data-tip="CMS">
+                      <Link href="/cms">
+                        <a>CMS</a>
+                      </Link>
+                    </div>
                   </li>
                 ) : (
                   []
@@ -117,32 +127,42 @@ const Nav = ({ children }) => {
           <div className="menu p-4 overflow-y-auto w-[60%] md:w-[30%] bg-base-100 lg:hidden">
             <ThemeSelector theme="select-xs" />
             <div className="divider" />
-            <ul className="flex flex-col">
-              <li className="uppercase font-bold text-sm">
-                <Link href="/">
-                  <a>Home</a>
-                </Link>
+            <ul className="flex flex-col justify-center items-start">
+              <li className="uppercase font-bold">
+                <div className="tooltip tooltip-right" data-tip="Home">
+                  <Link href="/">
+                    <a>Home</a>
+                  </Link>
+                </div>
               </li>
-              <li className="uppercase font-bold text-sm">
-                <Link href="/about">
-                  <a>About</a>
-                </Link>
+              <li className="uppercase font-bold">
+                <div className="tooltip tooltip-right" data-tip="About">
+                  <Link href="/about">
+                    <a>About</a>
+                  </Link>
+                </div>
               </li>
-              <li className="uppercase font-bold text-sm">
-                <Link href="/discover">
-                  <a>Discover</a>
-                </Link>
+              <li className="uppercase font-bold">
+                <div className="tooltip tooltip-right" data-tip="Discover">
+                  <Link href="/discover">
+                    <a>Discover</a>
+                  </Link>
+                </div>
               </li>
-              <li className="uppercase font-bold text-sm">
-                <Link href="/discussion">
-                  <a>Discussion</a>
-                </Link>
+              <li className="uppercase font-bold">
+                <div className="tooltip tooltip-right" data-tip="Discussion">
+                  <Link href="/discussion">
+                    <a>Discussion</a>
+                  </Link>
+                </div>
               </li>
               {showCMS ? (
-                <li className="uppercase font-bold text-sm">
-                  <Link href="/cms">
-                    <a>CMS</a>
-                  </Link>
+                <li className="uppercase font-bold">
+                  <div className="tooltip tooltip-right" data-tip="CMS">
+                    <Link href="/cms">
+                      <a>CMS</a>
+                    </Link>
+                  </div>
                 </li>
               ) : (
                 []
