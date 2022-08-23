@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import Head from "next/head";
+import Link from 'next/link'
 import _ from "lodash";
 import { useState, useEffect } from "react";
 import Moment from "moment";
@@ -24,6 +25,14 @@ const DiscussionDetail = () => {
       </Head>
       <div className="py-4 flex flex-col justify-center items-center gap-4">
         <div className="w-[90%] sm:w-[80%]">
+          <div className="text-sm breadcrumbs">
+            <ul>
+              <li>
+                <Link href="/discussion">Discussion</Link>
+              </li>
+              <li>{data.title}</li>
+            </ul>
+          </div>
           <h2 className="bg-base-100 rounded-full px-3 py-1 text-lg text-center mb-4 font-bold">
             {data.title}
           </h2>
