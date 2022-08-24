@@ -181,9 +181,14 @@ const About = () => {
                     {item.icon}
                     <h2 className="card-title">{item.name}</h2>
                     <div className="card-actions justify-end">
-                      <a href={item.url} className="btn btn-primary btn-sm">
+                      <button
+                        onClick={() => {
+                          window.open(item.url);
+                        }}
+                        className="btn btn-primary btn-sm"
+                      >
                         Learn More
-                      </a>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -194,12 +199,14 @@ const About = () => {
             {/* Start of Source Code */}
             <p>
               If you wish to see the source code for this website,
-              <a
-                href="https://github.com/Aiman217/osp-usm-nextjs"
+              <button
+                onClick={() => {
+                  window.open("https://github.com/Aiman217/osp-usm-nextjs");
+                }}
                 className="link link-primary ml-1"
               >
                 click here.
-              </a>
+              </button>
             </p>
             <br />
             <p>If you wish to contribute, please follow the steps below.</p>
