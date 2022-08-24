@@ -34,7 +34,7 @@ const Documents = () => {
       </Head>
       <div className="py-4 flex flex-col justify-center items-center gap-4">
         <div className="w-[90%] sm:w-[80%]">
-          <div className="flex flex-row justify-between items-center">
+          <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-sm breadcrumbs">
               <ul>
                 <li>
