@@ -7,9 +7,11 @@ import { db } from "/firebase-config";
 import { AiOutlineRead, AiOutlineClose } from "react-icons/ai";
 import Moment from "moment";
 import Loading from "/components/Loading";
+import Search from "/components/Search";
 
 const Documents = () => {
   const [annLists, setAnnLists] = useState([]);
+  const [annSearch, setAnnSearch] = useState([]);
   const [annSelect, setAnnSelect] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -18,6 +20,7 @@ const Documents = () => {
     const getAnn = async () => {
       const dataAnn = await getDoc(doc(db, "contents", "announcements"));
       setAnnLists(Object.values(dataAnn.data()));
+      setAnnSearch(Object.values(dataAnn.data()));
       setLoading(false);
     };
     getAnn();
@@ -32,15 +35,23 @@ const Documents = () => {
       </Head>
       <div className="py-4 flex flex-col justify-center items-center gap-4">
         <div className="w-[90%] sm:w-[80%]">
-          <div className="text-sm breadcrumbs">
-            <ul>
-              <li>
-                <Link href="/discover">Discover</Link>
-              </li>
-              <li>Announcements</li>
-            </ul>
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="text-sm breadcrumbs">
+              <ul>
+                <li>
+                  <Link href="/discover">Discover</Link>
+                </li>
+                <li>Announcements</li>
+              </ul>
+            </div>
+            <Search
+              searchList={annSearch}
+              setSearchList={setAnnSearch}
+              backupList={annLists}
+              type="title"
+            />
           </div>
-          <h2 className="bg-base-100 rounded-full px-3 py-1 text-lg text-center mb-4 font-bold">
+          <h2 className="bg-base-100 rounded-full px-3 py-1 text-lg text-center my-4 font-bold">
             Announcements
           </h2>
           <div className="card w-full overflow-x-auto border-2 py-4">
@@ -55,7 +66,7 @@ const Documents = () => {
                 </tr>
               </thead>
               <tbody>
-                {annLists.map((item, index) => (
+                {annSearch.map((item, index) => (
                   <tr key={index}>
                     <th>{++index}</th>
                     <td>{item.title}</td>

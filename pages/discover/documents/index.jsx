@@ -43,7 +43,12 @@ const Documents = () => {
                 <li>Documents</li>
               </ul>
             </div>
-            <Search searchList={docSearch} setSearchList={setDocSearch} backupList={docLists} />
+            <Search
+              searchList={docSearch}
+              setSearchList={setDocSearch}
+              backupList={docLists}
+              type="name"
+            />
           </div>
           <h2 className="bg-base-100 rounded-full px-3 py-1 text-lg text-center my-4 font-bold">
             Important Documents

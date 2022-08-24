@@ -26,7 +26,7 @@ const Search = (props) => {
             if (searchInput === "") {
               return val;
             } else if (
-              val.name.toLowerCase().includes(searchInput.toLowerCase())
+              val[props.type].toLowerCase().includes(searchInput.toLowerCase())
             ) {
               return val;
             }
