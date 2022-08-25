@@ -108,7 +108,7 @@ const DiscussionDetail = ({ user }) => {
                           "MMMM Do YYYY, h:mm:ss a"
                         )}
                       </div>
-                      <div className="divider m-2"></div>
+                      <div className="divider m-2 md:hidden"></div>
                     </div>
                     <p>{item.comment}</p>
                   </div>
