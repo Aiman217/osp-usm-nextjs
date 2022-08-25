@@ -1,14 +1,38 @@
 import { useRouter } from "next/router";
 import Head from "next/head";
-import Link from 'next/link'
+import Link from "next/link";
 import _ from "lodash";
 import { useState, useEffect } from "react";
 import Moment from "moment";
+import { db } from "/firebase-config";
+import { doc, setDoc, arrayUnion, Timestamp } from "firebase/firestore";
+import { AiOutlineClose } from "react-icons/ai";
 
-const DiscussionDetail = () => {
+const DiscussionDetail = ({ user }) => {
   const router = useRouter();
   const [data, setData] = useState([]);
   const [hide, setHide] = useState(false);
+  const [comment, setComment] = useState("");
+  const [success, setSuccess] = useState("");
+
+  const addComment = async () => {
+    await setDoc(
+      doc(db, "discussion", data.id),
+      {
+        comments: arrayUnion({
+          comment: comment,
+          email: user.email,
+          created_at: Timestamp.now(),
+        }),
+      },
+      { merge: true }
+    ).then(() => {
+      setSuccess("Successfully add comment.");
+      setTimeout(() => {
+        setSuccess("");
+      }, 4000);
+    });
+  };
 
   useEffect(() => {
     if (router.query.data) {
@@ -48,6 +72,26 @@ const DiscussionDetail = () => {
                   {hide ? "Show Comments" : "Hide Comments"}
                 </button>
               </div>
+              {user && !hide && (
+                <>
+                  <input
+                    onChange={(event) => {
+                      setComment(event.target.value);
+                    }}
+                    type="text"
+                    placeholder="comments..."
+                    className="input input-bordered"
+                  />
+                  <div className="flex justify-end">
+                    <button
+                      onClick={addComment}
+                      className="btn btn-sm max-w-fit btn-primary"
+                    >
+                      Comment
+                    </button>
+                  </div>
+                </>
+              )}
               {data.comments &&
                 data.comments.map((item, index) => (
                   <div
@@ -57,13 +101,14 @@ const DiscussionDetail = () => {
                       (hide ? "hidden" : "")
                     }
                   >
-                    <div className="flex flex-row justify-between">
+                    <div className="flex flex-col md:flex-row items-center md:justify-between">
                       <h1 className="text-md font-bold mb-2">{item.email}</h1>
-                      <div className="text-sm">
+                      <div className="text-sm italic">
                         {Moment.unix(item.created_at.seconds).format(
                           "MMMM Do YYYY, h:mm:ss a"
                         )}
                       </div>
+                      <div className="divider m-2"></div>
                     </div>
                     <p>{item.comment}</p>
                   </div>
@@ -71,6 +116,20 @@ const DiscussionDetail = () => {
             </div>
           </div>
         </div>
+        {!_.isEmpty(success) && (
+          <div className="toast">
+            <div className="alert alert-success shadow-lg">
+              <div>
+                <span className="text-sm sm:text-base">{success}</span>
+                <AiOutlineClose
+                  onClick={() => setSuccess("")}
+                  size={20}
+                  className="text-white cursor-pointer"
+                />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
