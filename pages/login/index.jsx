@@ -135,7 +135,7 @@ const Login = () => {
                     </label>
                   </div>
                 </div>
-                <div>
+                <div className="w-fit">
                   <h1
                     onClick={() => {
                       resetPassword(loginEmail);
@@ -159,13 +159,13 @@ const Login = () => {
                       onClick={loginGithub}
                       className="btn-circle bg-base-300 text-white"
                     >
-                      <AiOutlineGithub size={30} className="mx-auto" />
+                      <AiOutlineGithub size={30} className="mx-auto hover:scale-105" />
                     </button>
                     <button
                       onClick={loginGoogle}
                       className="btn-circle bg-base-300 text-white"
                     >
-                      <AiOutlineGoogle size={30} className="mx-auto" />
+                      <AiOutlineGoogle size={30} className="mx-auto hover:scale-105" />
                     </button>
                   </div>
                   <Link href="/register" className="cursor-pointer">
