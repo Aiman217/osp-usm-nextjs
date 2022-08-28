@@ -63,7 +63,7 @@ const Links = () => {
               </thead>
               <tbody>
                 {linkSearch.map((item, index) => (
-                  <tr key={index}>
+                  <tr key={index} className="hover">
                     <th>{++index}</th>
                     <td>{item.owner}</td>
                     <td>{item.desc.substring(0, 40) + "..."}</td>
