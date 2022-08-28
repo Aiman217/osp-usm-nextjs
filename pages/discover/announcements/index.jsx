@@ -67,7 +67,7 @@ const Documents = () => {
               </thead>
               <tbody>
                 {annSearch.map((item, index) => (
-                  <tr key={index}>
+                  <tr key={index} className="hover">
                     <th>{++index}</th>
                     <td>{item.title}</td>
                     <td>{item.desc.substring(0, 24) + "..."}</td>
