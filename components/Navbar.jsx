@@ -47,20 +47,17 @@ const Nav = ({ children }) => {
               </label>
             </div>
             <div className="flex-1">
-              <h1 className="font-bold">OneStopPortal</h1>
+              <h1 className="font-bold">
+                <Link href="/">
+                  <a className="cursor-pointer">OneStopPortal</a>
+                </Link>
+              </h1>
               <div className="divider divider-horizontal hidden lg:block" />
               <ThemeSelector theme="select-sm hidden lg:block" />
               <div className="divider divider-horizontal hidden lg:block" />
             </div>
             <div className="flex-none hidden lg:block">
               <ul className="flex flex-row gap-4">
-                <li className="uppercase font-bold">
-                  <div className="tooltip tooltip-bottom" data-tip="Home">
-                    <Link href="/">
-                      <a>Home</a>
-                    </Link>
-                  </div>
-                </li>
                 <li className="uppercase font-bold">
                   <div className="tooltip tooltip-bottom" data-tip="About">
                     <Link href="/about">
@@ -128,13 +125,6 @@ const Nav = ({ children }) => {
             <ThemeSelector theme="select-xs" />
             <div className="divider" />
             <ul className="flex flex-col justify-center items-start">
-              <li className="uppercase font-bold">
-                <div className="tooltip tooltip-right" data-tip="Home">
-                  <Link href="/">
-                    <a>Home</a>
-                  </Link>
-                </div>
-              </li>
               <li className="uppercase font-bold">
                 <div className="tooltip tooltip-right" data-tip="About">
                   <Link href="/about">

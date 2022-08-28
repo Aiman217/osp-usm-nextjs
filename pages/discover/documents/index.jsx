@@ -65,7 +65,7 @@ const Documents = () => {
               </thead>
               <tbody>
                 {docSearch.map((item, index) => (
-                  <tr key={index}>
+                  <tr key={index} className="hover">
                     <th>{++index}</th>
                     <td>{item.name}</td>
                     <td>
